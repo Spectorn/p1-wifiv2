@@ -1,6 +1,6 @@
 package com.example.wifiv3;
 
-/*
+
 
 public class WifiInformation {
     public WifiInformation() {
@@ -11,4 +11,3 @@ public class WifiInformation {
 }
 
 
- */
