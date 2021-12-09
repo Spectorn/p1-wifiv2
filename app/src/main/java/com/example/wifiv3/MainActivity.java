@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, activity_wifitest.class);
 
         if (WFM.isWifiEnabled() == true) {
-            System.out.println("Det virker");
             startActivity(intent);
         } else {
             PopUpWindow.show(getSupportFragmentManager(), "PopUp");
