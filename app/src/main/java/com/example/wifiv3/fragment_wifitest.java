@@ -17,14 +17,20 @@ import org.apache.commons.net.ftp.FTPClient;
 
 import androidx.fragment.app.Fragment;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.util.concurrent.TimeUnit;
 
 public class fragment_wifitest extends Fragment {
+    FTPClient ftp = new FTPClient();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_test, parent, false);
@@ -38,8 +44,13 @@ public class fragment_wifitest extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        WifiScan();
-        SpeedTest();
+        try {
+            SpeedTest();
+            WifiScan();
+            uploadtest();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -69,19 +80,8 @@ public class fragment_wifitest extends Fragment {
 
         for(int i=0; i<AverageRSSI.length; i++){
             total = total + AverageRSSI[i];
-            // System.out.println(total);
-
             int average = total / AverageRSSI.length;
-            /*
 
-            System.out.println(average + "Average");
-            System.out.println(RSSIONE + "RSSI One");
-            System.out.println(RSSITWO + "RSSI Two");
-            System.out.println(RSSITHREE + "RSSI Three");
-            System.out.println(BSSID);
-            System.out.println(SSID);
-
-             */
 
         }
 
@@ -91,11 +91,8 @@ public class fragment_wifitest extends Fragment {
 
 
     }
-    public void SpeedTest(){
-        FTPClient ftp = new FTPClient();
 
-
-
+    public void SpeedTest() throws InterruptedException {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -108,11 +105,8 @@ public class fragment_wifitest extends Fragment {
                     long begin = System.currentTimeMillis();
                     ftp.retrieveFile("/airtame",out);
                     long end = System.currentTimeMillis();
-                    long delta = end - begin;
-                    System.out.println(delta);
-                    System.out.println("Downloaded it at the speed of " + 67.7/(delta/1000) + " MB/s");
-
-
+                    long dt = end - begin;
+                    System.out.println("Downloaded it at the speed of " + (67.7/(dt/1000))*8 + " Mb/s");
                 }
                 catch(IOException e){
                     System.out.println("Du har fucked op");
@@ -121,10 +115,48 @@ public class fragment_wifitest extends Fragment {
         });
 
         thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            System.out.println("Download thread borked");
+        }
 
 
 
 
+    }
+
+    public void uploadtest() throws InterruptedException {
+        Thread uploadthread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Upload thread has started!!");
+                File file = new File(String.valueOf(getContext().getFilesDir()) + "/airtame");
+                try {
+                    InputStream fs = new BufferedInputStream(new FileInputStream(file));
+                    ftp.setBufferSize(10240*10240);
+                    System.out.println("Bruh 1");
+                    long begin = System.currentTimeMillis();
+                    ftp.storeFile("/upload/airtame", fs);
+                    long end = System.currentTimeMillis();
+                    System.out.println("Bruh 2");
+                    long dt = end - begin;
+                    fs.close();
+                    System.out.println("OMG it has been sent at a speed of " + (67.7/(dt/1000))*8 + " Mb/s. What a chad.");
+                } catch (IOException e) {
+                    System.out.println("Piss off, low rank");
+                    System.out.println(e);
+                }
+            }
+
+        });
+        uploadthread.start();
+
+        try {
+            uploadthread.join();
+        } catch (InterruptedException e) {
+            System.out.println("upload thread borked");
+        }
     }
 
 
