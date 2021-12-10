@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WifiV3</string>
+    <string name="greeting">Velkommen til vores Wi-Fi diagnostic værktøj!</string>
+    <string name="scanGreeting">Først skal vi lave en måling ved din router</string>
+    <string name="PopUp">Wifi er ikke aktiveret</string>
+    <string name="PopUp2">Slå Wifi til</string>
+    <string name="Popup3">Annuller</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
