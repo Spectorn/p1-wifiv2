@@ -1,12 +1,9 @@
 package com.example.wifiv3;
 
-
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.Configuration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -14,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 
 import org.apache.commons.net.ftp.FTPClient;
 
@@ -29,84 +26,52 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
-import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class fragment_wifitest extends Fragment {
     FTPClient ftp = new FTPClient();
-    Button scanNow,scanStart, english;
-    TextView welcomeText, scanText;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.fragment_test, parent, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState){
 
     }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        /*scanNow = getView().findViewById(R.id.StartTesten);
-        scanStart = getView().findViewById(R.id.ScanButton);
-        welcomeText = getView().findViewById(R.id.textView2);
-        scanText = getView().findViewById(R.id.textView3);
-
-         */
-
-
         try {
             SpeedTest();
-            WifiScan();
             uploadtest();
+            WifiScan();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+        }
 
-    }
+
 
     public void WifiScan(){
         WifiManager WFM = (WifiManager) getContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo WifiInfo = WFM.getConnectionInfo();
 
-       String BSSID = WifiInfo.getBSSID();
-       String SSID = WifiInfo.getSSID();
-       int RSSIONE = WifiInfo.getRssi();
-       int RSSITWO;
-       int RSSITHREE;
-
-
-
-       RSSITWO = WifiInfo.getRssi();
-
-       RSSITHREE = WifiInfo.getRssi();
-
-        int[] AverageRSSI = {RSSIONE,RSSITWO,RSSITHREE};
-
-
-
-
-        int total = 0;
-
-        for(int i=0; i<AverageRSSI.length; i++){
-            total = total + AverageRSSI[i];
-            int average = total / AverageRSSI.length;
+        String BSSID = WifiInfo.getBSSID();
+        String SSID = WifiInfo.getSSID();
+        int RSSI = WifiInfo.getRssi();
 
 
         }
 
 
-
-
-
-
-    }
-
     public void SpeedTest() throws InterruptedException {
+
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -140,6 +105,7 @@ public class fragment_wifitest extends Fragment {
 
     }
 
+
     public void uploadtest() throws InterruptedException {
         Thread uploadthread = new Thread(new Runnable() {
             @Override
@@ -149,16 +115,16 @@ public class fragment_wifitest extends Fragment {
                 try {
                     InputStream fs = new BufferedInputStream(new FileInputStream(file));
                     ftp.setBufferSize(10240*10240);
-                    System.out.println("Bruh 1");
+                    System.out.println("Milestone 1");
                     long begin = System.currentTimeMillis();
                     ftp.storeFile("/upload/airtame", fs);
                     long end = System.currentTimeMillis();
-                    System.out.println("Bruh 2");
+                    System.out.println("Milestone 2");
                     long dt = end - begin;
                     fs.close();
                     System.out.println("OMG it has been sent at a speed of " + (67.7/(dt/1000))*8 + " Mb/s. What a chad.");
                 } catch (IOException e) {
-                    System.out.println("Piss off, low rank");
+                    System.out.println("Error");
                     System.out.println(e);
                 }
             }
@@ -166,11 +132,14 @@ public class fragment_wifitest extends Fragment {
         });
         uploadthread.start();
 
-        try {
+
+      try {
             uploadthread.join();
         } catch (InterruptedException e) {
             System.out.println("upload thread borked");
         }
+
+
     }
 
 
@@ -178,4 +147,3 @@ public class fragment_wifitest extends Fragment {
 
 
 }
-
