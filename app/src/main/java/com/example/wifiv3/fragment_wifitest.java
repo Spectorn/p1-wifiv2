@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+
 import org.apache.commons.net.ftp.FTPClient;
 
 import androidx.fragment.app.Fragment;
@@ -26,10 +29,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class fragment_wifitest extends Fragment {
     FTPClient ftp = new FTPClient();
+    Button scanNow,scanStart, english;
+    TextView welcomeText, scanText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -39,11 +45,19 @@ public class fragment_wifitest extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
 
-
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*scanNow = getView().findViewById(R.id.StartTesten);
+        scanStart = getView().findViewById(R.id.ScanButton);
+        welcomeText = getView().findViewById(R.id.textView2);
+        scanText = getView().findViewById(R.id.textView3);
+
+         */
+
+
         try {
             SpeedTest();
             WifiScan();

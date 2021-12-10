@@ -28,12 +28,4 @@ public class activity_wifitest extends AppCompatActivity {
         ft.commit();
 
     }
-
-
-
-
-
-
-
-
 }

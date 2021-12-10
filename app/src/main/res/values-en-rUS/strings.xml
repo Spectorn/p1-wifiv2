@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WiFiV3</string>
+    <string name="PopUp">WiFi is not activated</string>
+    <string name="greeting">Welcome to our WiFi diagnostics tool!</string>
+    <string name="scanGreeting">First we need to do a scan on your network</string>
+    <string name="PopUp2">Turn WiFi on</string>
+    <string name="Popup3">Cancel</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

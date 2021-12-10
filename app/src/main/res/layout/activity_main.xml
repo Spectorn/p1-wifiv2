@@ -46,4 +46,15 @@
         app:layout_constraintVertical_bias="0.357"
         tools:text="Velkommen til vores Wi-Fi diagnostik værktøj!" />
 
+    <Button
+        android:id="@+id/engBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Engelsk"
+        android:onClick="changeLanguage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

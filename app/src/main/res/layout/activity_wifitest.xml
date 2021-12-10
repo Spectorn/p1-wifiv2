@@ -53,7 +53,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.069"
-        app:srcCompat="@drawable/handphone" />
+        />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -65,7 +65,7 @@
         app:layout_constraintStart_toEndOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.069"
-        app:srcCompat="@drawable/router" />
+        />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -75,8 +75,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.068"
-        app:srcCompat="@drawable/arrow" />
+        app:layout_constraintVertical_bias="0.068"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
