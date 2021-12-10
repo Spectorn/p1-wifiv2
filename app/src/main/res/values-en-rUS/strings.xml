@@ -4,6 +4,7 @@
     <string name="PopUp">WiFi is not activated</string>
     <string name="greeting">Welcome to our WiFi diagnostics tool!</string>
     <string name="scanGreeting">First we need to do a scan on your network</string>
+    <string name="startMeasurement">Move your phone as close to the router as possible</string>
     <string name="PopUp2">Turn WiFi on</string>
     <string name="Popup3">Cancel</string>
     <!-- TODO: Remove or change this placeholder text -->

@@ -2,9 +2,9 @@ package com.example.wifiv3;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -101,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void changeLanguage(View view) {
         TextView welcomeText = findViewById(R.id.textView2);
+        TextView scanText = findViewById(R.id.textView);
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.imageView3);
         Locale local = new Locale(view.getTag().toString());
         Configuration config = new Configuration();
         config.locale = local;
@@ -108,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Changing text according to the language parameter
         welcomeText.setText(getString(R.string.greeting));
-        //scanText.setText(getString(R.string.scanGreeting)); WIP
+        //scanText.setText(getString(R.string.startMeasurement));
 
         // Writes new lang to config.cfg
         FileOutputStream fos;
@@ -120,9 +122,5 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             System.out.println("Bruh the file can not be created... cringe");
         }
-
-
-
-
     }
 }

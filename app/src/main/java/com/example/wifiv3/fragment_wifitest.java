@@ -81,6 +81,7 @@ public class fragment_wifitest extends Fragment {
                     ftp.enterLocalPassiveMode();
                     File file = new File(String.valueOf(getContext().getFilesDir())+"/airtame");
                     OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
+                    System.out.println("Started download test...");
                     long begin = System.currentTimeMillis();
                     ftp.retrieveFile("/airtame",out);
                     long end = System.currentTimeMillis();

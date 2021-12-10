@@ -82,7 +82,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Flyt dine telefon så tæt som muligt på routeren"
+        android:text="@string/startMeasurement"
         app:layout_constraintBottom_toTopOf="@+id/FragmentContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
