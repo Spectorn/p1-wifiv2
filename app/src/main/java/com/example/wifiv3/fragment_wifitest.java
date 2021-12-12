@@ -29,9 +29,9 @@ import java.lang.reflect.Field;
 import java.util.concurrent.TimeUnit;
 
 public class fragment_wifitest extends Fragment {
+
+    // imagine lmao
     FTPClient ftp = new FTPClient();
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -39,8 +39,6 @@ public class fragment_wifitest extends Fragment {
         return inflater.inflate(R.layout.fragment_test, parent, false);
 
     }
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
