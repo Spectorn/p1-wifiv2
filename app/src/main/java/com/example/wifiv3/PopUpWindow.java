@@ -28,8 +28,6 @@ public class PopUpWindow extends DialogFragment {
                     }
                 });
         return builder.create();
-
-
     }
 
 }

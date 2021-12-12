@@ -41,10 +41,6 @@ public class activity_wifitest extends AppCompatActivity {
         PictureThree.setVisibility(View.GONE);
         Explainer.setVisibility(View.GONE);
 
-
-
-
-
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FragmentContainer, new fragment_wifitest());
 
