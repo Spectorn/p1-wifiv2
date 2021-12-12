@@ -12,10 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import com.example.wifiv3.data.ftpInteraction;
 
 import org.apache.commons.net.ftp.FTPClient;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -30,7 +33,6 @@ import java.util.concurrent.TimeUnit;
 
 public class fragment_wifitest extends Fragment {
 
-    // imagine lmao
     FTPClient ftp = new FTPClient();
 
     @Override
@@ -43,14 +45,20 @@ public class fragment_wifitest extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
+
         super.onCreate(savedInstanceState);
+
+        File file = new File(String.valueOf(getContext().getFilesDir())+"/airtame");
+        ftpInteraction ftpCon = new ftpInteraction(file);
         try {
-            SpeedTest();
-            uploadtest();
-            WifiScan();
+            ftpCon.login();
+            ftpCon.SpeedTest();
+            ftpCon.uploadtest();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.out.println("Bruh");
         }
+
+
 
         }
 
