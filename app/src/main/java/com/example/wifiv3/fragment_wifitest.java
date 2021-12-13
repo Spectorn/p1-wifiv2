@@ -120,13 +120,14 @@ public class fragment_wifitest extends Fragment implements DataSender {
     // Det funktionen activity kalder når denne fragment skal lave testen
     public void CallTest(int TestNumber) {
         TestType = TestNumber;
+
         File file = new File(String.valueOf(getContext().getFilesDir()) +"/airtame");
         ftpInteraction ftpCon = new ftpInteraction(file);
 
 
 
         try {
-            System.out.println("Call test bliver kaldt!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+            ftpCon.login();
             ftpCon.SpeedTest();
             ftpCon.uploadtest();
             WifiScan();
@@ -134,6 +135,5 @@ public class fragment_wifitest extends Fragment implements DataSender {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 }
