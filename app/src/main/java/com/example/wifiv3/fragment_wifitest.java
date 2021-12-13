@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import java.io.File;
 import android.widget.ProgressBar;
 
 import com.example.wifiv3.data.ftpInteraction;
@@ -29,6 +28,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.util.concurrent.TimeUnit;
+import java.io.*;
 
 public class fragment_wifitest extends Fragment implements DataSender {
 
@@ -41,8 +41,8 @@ public class fragment_wifitest extends Fragment implements DataSender {
     long RSSI;
     String BSSID;
     int TestType;
-    // Fix this shit...........
-    File file = new File(getContext().getFilesDir() +"/airtame");
+    // Fix this shit...
+    File file = new File(String.valueOf(getContext().getFilesDir()) +"/airtame");
     ftpInteraction ftpCon = new ftpInteraction(file);
 
 
