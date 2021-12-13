@@ -42,6 +42,8 @@ public class activity_wifitest extends AppCompatActivity implements DataSender{
         Explainer = (TextView) findViewById(R.id.textView);
 
         ActiveTestType = 1;
+
+
     }
 
 
@@ -52,15 +54,16 @@ public class activity_wifitest extends AppCompatActivity implements DataSender{
         // Hvis TestType = 1 så er det en Basis værdi måling. alt over TestType 1 bliver set som det samme af activty.
 
 
-        if (ActiveTestType == 1){
+        if(ActiveTestType == 1){
             BasisTest();
             ActiveTestType ++;
         }
         else {
-            NormalTest(ActiveTestType);
+            NormalTest();
             ActiveTestType ++;
         }
-    }
+
+        }
 
 
 
@@ -93,11 +96,10 @@ public class activity_wifitest extends AppCompatActivity implements DataSender{
     }
     // når brugeren trykker på knappen alle andre gange bliver denne funktion kaldt
 
-    public void NormalTest(int activeTestType){
+    public void NormalTest(){
         //Laver instans af fragment_wifitest og kalder dens funktion CallTest.
         Fragment fragment1 = (fragment_wifitest) getSupportFragmentManager().findFragmentByTag("wifi");
-        //fragment_wifitest FragWifi = (fragment_wifitest) fragment1;
-        fragment_wifitest FragWifi = new fragment_wifitest();
+        fragment_wifitest FragWifi = (fragment_wifitest) fragment1;
         FragWifi.CallTest(ActiveTestType);
     }
 
@@ -135,6 +137,17 @@ public class activity_wifitest extends AppCompatActivity implements DataSender{
         fragment_result FragRes = (fragment_result) fragment;
 
         FragRes.WifiData(TestType, Download, Upload, BSSID, RSSI);
+
+
+
+
+
+
+
+
     }
+
+
+
 }
 

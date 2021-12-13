@@ -56,6 +56,7 @@ public class ftpInteraction {
                     long end = System.currentTimeMillis();
                     long dt = end - begin;
                     System.out.println("Downloaded it at the speed of " + (67.7 / (dt / 1000)) * 8 + " Mb/s");
+                    long Download = (long) ((67.7 / (dt / 1000)) * 8);
 
                     // Needs a CB function
                 } catch (IOException e) {
@@ -81,7 +82,7 @@ public class ftpInteraction {
                 try {
 
                     InputStream fs = new BufferedInputStream(new FileInputStream(file));
-                    ftp.setBufferSize(10240 * 10240);
+                    //ftp.setBufferSize(10240 * 10240);
                     System.out.println("Milestone 1");
                     long begin = System.currentTimeMillis();
                     ftp.storeFile("/upload/airtame", fs);
@@ -90,8 +91,10 @@ public class ftpInteraction {
                     long dt = end - begin;
                     fs.close();
                     System.out.println("OMG it has been sent at a speed of " + (67.7 / (dt / 1000)) * 8 + " Mb/s. What a chad.");
+                    long Upload = (long) ((67.7 / (dt / 1000)) * 8);
 
-                    // Needs a CB function
+                    // Needs a CB f
+                    // unction
                 } catch (IOException e) {
                     System.out.println("Error");
                     System.out.println(e);
