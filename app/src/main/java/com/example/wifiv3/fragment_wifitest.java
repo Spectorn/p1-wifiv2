@@ -28,8 +28,17 @@ import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.util.concurrent.TimeUnit;
 
-public class fragment_wifitest extends Fragment {
+public class fragment_wifitest extends Fragment implements DataSender {
+
+    public fragment_wifitest(){
+
+    }
     FTPClient ftp = new FTPClient();
+    long Download;
+    long Upload;
+    long RSSI;
+    String BSSID;
+    int TestType;
 
 
 
@@ -44,17 +53,22 @@ public class fragment_wifitest extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+
         try {
             SpeedTest();
             uploadtest();
             WifiScan();
+            SendToActivity(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+
+
         }
+
+
 
 
 
@@ -62,12 +76,15 @@ public class fragment_wifitest extends Fragment {
         WifiManager WFM = (WifiManager) getContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo WifiInfo = WFM.getConnectionInfo();
 
-        String BSSID = WifiInfo.getBSSID();
+        BSSID = WifiInfo.getBSSID();
         String SSID = WifiInfo.getSSID();
-        int RSSI = WifiInfo.getRssi();
+        RSSI = WifiInfo.getRssi();
 
 
         }
+
+
+
 
 
     public void SpeedTest() throws InterruptedException {
@@ -87,6 +104,7 @@ public class fragment_wifitest extends Fragment {
                     long end = System.currentTimeMillis();
                     long dt = end - begin;
                     System.out.println("Downloaded it at the speed of " + (67.7/(dt/1000))*8 + " Mb/s");
+                    Download = (long) (67.7/(dt/1000))*8;
                 }
                 catch(IOException e){
                     System.out.println("Du har fucked op");
@@ -115,7 +133,7 @@ public class fragment_wifitest extends Fragment {
                 File file = new File(String.valueOf(getContext().getFilesDir()) + "/airtame");
                 try {
                     InputStream fs = new BufferedInputStream(new FileInputStream(file));
-                    ftp.setBufferSize(10240*10240);
+                    // ftp.setBufferSize(10240*10240);
                     System.out.println("Milestone 1");
                     long begin = System.currentTimeMillis();
                     ftp.storeFile("/upload/airtame", fs);
@@ -124,6 +142,8 @@ public class fragment_wifitest extends Fragment {
                     long dt = end - begin;
                     fs.close();
                     System.out.println("OMG it has been sent at a speed of " + (67.7/(dt/1000))*8 + " Mb/s. What a chad.");
+                    Upload = (long) ((67.7/(dt/1000))*8);
+
                 } catch (IOException e) {
                     System.out.println("Error");
                     System.out.println(e);
@@ -132,6 +152,7 @@ public class fragment_wifitest extends Fragment {
 
         });
         uploadthread.start();
+
 
 
       try {
@@ -143,8 +164,47 @@ public class fragment_wifitest extends Fragment {
 
     }
 
+    public void SendToActivity(int Testnumber){
+        activity_wifitest activity = (activity_wifitest) getActivity();
+        activity.ReplaceFragment();
+        TestType = Testnumber;
 
 
 
 
+        if (activity != null) {
+            activity.WifiData(TestType, Download, Upload, BSSID, RSSI);
+        }
+        else{
+            System.out.println("Fejl i fragment");
+        }
+
+
+
+
+
+    }
+
+
+    @Override
+    public void WifiData(int TestType, long Download, long Upload, String BSSID, long RSSI) {
+
+
+    }
+
+
+    public void CallTest(int TestNumber){
+
+        TestType = TestNumber;
+
+        try {
+            SpeedTest();
+            uploadtest();
+            WifiScan();
+            SendToActivity(TestNumber);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
