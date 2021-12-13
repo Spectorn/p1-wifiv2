@@ -80,6 +80,7 @@ public class ftpInteraction {
                 System.out.println("Upload thread has started!!");
                 //File file = new File(String.valueOf(getContext().getFilesDir()) + "/airtame");
                 try {
+
                     InputStream fs = new BufferedInputStream(new FileInputStream(file));
                     //ftp.setBufferSize(10240 * 10240);
                     System.out.println("Milestone 1");
