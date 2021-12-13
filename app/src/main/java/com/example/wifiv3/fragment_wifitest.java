@@ -12,13 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import com.example.wifiv3.data.ftpInteraction;
 
 import org.apache.commons.net.ftp.FTPClient;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -31,9 +28,19 @@ import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.util.concurrent.TimeUnit;
 
-public class fragment_wifitest extends Fragment {
+public class fragment_wifitest extends Fragment implements DataSender {
 
+    public fragment_wifitest(){
+
+    }
     FTPClient ftp = new FTPClient();
+    long Download;
+    long Upload;
+    long RSSI;
+    String BSSID;
+    int TestType;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -42,25 +49,26 @@ public class fragment_wifitest extends Fragment {
 
     }
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
 
-        File file = new File(getContext().getFilesDir()+"/airtame");
-        ftpInteraction ftpCon = new ftpInteraction(file);
         try {
-            ftpCon.login();
-            ftpCon.SpeedTest();
-            ftpCon.uploadtest();
+            SpeedTest();
+            uploadtest();
+            WifiScan();
+            SendToActivity(1);
         } catch (InterruptedException e) {
-            System.out.println("Bruh");
+            e.printStackTrace();
         }
 
 
 
         }
+
+
 
 
 
@@ -68,10 +76,137 @@ public class fragment_wifitest extends Fragment {
         WifiManager WFM = (WifiManager) getContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo WifiInfo = WFM.getConnectionInfo();
 
-        String BSSID = WifiInfo.getBSSID();
+        BSSID = WifiInfo.getBSSID();
         String SSID = WifiInfo.getSSID();
-        int RSSI = WifiInfo.getRssi();
+        RSSI = WifiInfo.getRssi();
 
 
         }
+
+
+
+
+
+    public void SpeedTest() throws InterruptedException {
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    ftp.connect("172.104.152.182",21);
+                    ftp.login("p1","comtek21p1b303b");
+                    ftp.enterLocalPassiveMode();
+                    File file = new File(String.valueOf(getContext().getFilesDir())+"/airtame");
+                    OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
+                    System.out.println("Started download test...");
+                    long begin = System.currentTimeMillis();
+                    ftp.retrieveFile("/airtame",out);
+                    long end = System.currentTimeMillis();
+                    long dt = end - begin;
+                    System.out.println("Downloaded it at the speed of " + (67.7/(dt/1000))*8 + " Mb/s");
+                    Download = (long) (67.7/(dt/1000))*8;
+                }
+                catch(IOException e){
+                    System.out.println("Du har fucked op");
+                }
+            }
+        });
+
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            System.out.println("Download thread borked");
+        }
+
+
+
+
+    }
+
+
+    public void uploadtest() throws InterruptedException {
+        Thread uploadthread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Upload thread has started!!");
+                File file = new File(String.valueOf(getContext().getFilesDir()) + "/airtame");
+                try {
+                    InputStream fs = new BufferedInputStream(new FileInputStream(file));
+                    // ftp.setBufferSize(10240*10240);
+                    System.out.println("Milestone 1");
+                    long begin = System.currentTimeMillis();
+                    ftp.storeFile("/upload/airtame", fs);
+                    long end = System.currentTimeMillis();
+                    System.out.println("Milestone 2");
+                    long dt = end - begin;
+                    fs.close();
+                    System.out.println("OMG it has been sent at a speed of " + (67.7/(dt/1000))*8 + " Mb/s. What a chad.");
+                    Upload = (long) ((67.7/(dt/1000))*8);
+
+                } catch (IOException e) {
+                    System.out.println("Error");
+                    System.out.println(e);
+                }
+            }
+
+        });
+        uploadthread.start();
+
+
+
+      try {
+            uploadthread.join();
+        } catch (InterruptedException e) {
+            System.out.println("upload thread borked");
+        }
+
+
+    }
+
+
+    // det igennem denne funktion at den indsamlede data bliver sendt til
+    public void SendToActivity(int Testnumber){
+        activity_wifitest activity = (activity_wifitest) getActivity();
+        activity.ReplaceFragment();
+        TestType = Testnumber;
+
+
+
+
+        if (activity != null) {
+            activity.WifiData(TestType, Download, Upload, BSSID, RSSI);
+        }
+        else{
+            System.out.println("Fejl i fragment");
+        }
+
+
+
+
+
+    }
+
+
+    @Override
+    public void WifiData(int TestType, long Download, long Upload, String BSSID, long RSSI) {
+
+
+    }
+
+    // Det funktionen activity kalder når denne fragment skal lave testen
+    public void CallTest(int TestNumber){
+
+        TestType = TestNumber;
+
+        try {
+            SpeedTest();
+            uploadtest();
+            WifiScan();
+            SendToActivity(TestNumber);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
