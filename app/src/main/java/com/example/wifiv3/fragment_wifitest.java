@@ -18,6 +18,8 @@ import com.example.wifiv3.data.ftpInteraction;
 
 import androidx.fragment.app.Fragment;
 
+import org.apache.commons.net.ftp.FTPClient;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -32,7 +34,7 @@ import java.io.*;
 
 public class fragment_wifitest extends Fragment implements DataSender {
 
-    public fragment_wifitest(){
+    public fragment_wifitest() {
 
     }
 
@@ -41,9 +43,6 @@ public class fragment_wifitest extends Fragment implements DataSender {
     long RSSI;
     String BSSID;
     int TestType;
-    // Fix this shit...
-    File file = new File(String.valueOf(getContext().getFilesDir()) +"/airtame");
-    ftpInteraction ftpCon = new ftpInteraction(file);
 
 
 
@@ -59,19 +58,20 @@ public class fragment_wifitest extends Fragment implements DataSender {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        File file = new File(String.valueOf(getContext().getFilesDir()) +"/airtame");
+        ftpInteraction ftpCon = new ftpInteraction(file);
 
         try {
+            ftpCon.login();
             ftpCon.SpeedTest();
             ftpCon.uploadtest();
+
             WifiScan();
             SendToActivity(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
-
-        }
+    }
 
 
 
@@ -87,12 +87,6 @@ public class fragment_wifitest extends Fragment implements DataSender {
 
 
         }
-
-
-
-
-
-
 
     // det igennem denne funktion at den indsamlede data bliver sendt til
     public void SendToActivity(int Testnumber){
@@ -124,11 +118,15 @@ public class fragment_wifitest extends Fragment implements DataSender {
     }
 
     // Det funktionen activity kalder når denne fragment skal lave testen
-    public void CallTest(int TestNumber){
-
+    public void CallTest(int TestNumber) {
         TestType = TestNumber;
+        File file = new File(String.valueOf(getContext().getFilesDir()) +"/airtame");
+        ftpInteraction ftpCon = new ftpInteraction(file);
+
+
 
         try {
+            System.out.println("Call test bliver kaldt!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
             ftpCon.SpeedTest();
             ftpCon.uploadtest();
             WifiScan();

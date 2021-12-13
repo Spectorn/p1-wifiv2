@@ -42,8 +42,6 @@ public class activity_wifitest extends AppCompatActivity implements DataSender{
         Explainer = (TextView) findViewById(R.id.textView);
 
         ActiveTestType = 1;
-
-
     }
 
 
@@ -62,8 +60,7 @@ public class activity_wifitest extends AppCompatActivity implements DataSender{
             NormalTest();
             ActiveTestType ++;
         }
-
-        }
+    }
 
 
 
