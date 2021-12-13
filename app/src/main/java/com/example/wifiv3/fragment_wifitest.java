@@ -61,6 +61,7 @@ public class fragment_wifitest extends Fragment implements DataSender {
         ftpInteraction ftpCon = new ftpInteraction(file);
 
         try {
+            ftpCon.iperf();
             ftpCon.login();
             ftpCon.SpeedTest();
             ftpCon.uploadtest();
