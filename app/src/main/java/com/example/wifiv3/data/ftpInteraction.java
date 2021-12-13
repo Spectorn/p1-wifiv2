@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import org.apache.commons.net.ftp.FTPClient;
 
+
 public class ftpInteraction {
     FTPClient ftp = new FTPClient();
     File file;
@@ -57,7 +58,6 @@ public class ftpInteraction {
                     System.out.println("Downloaded it at the speed of " + (67.7 / (dt / 1000)) * 8 + " Mb/s");
 
                     // Needs a CB function
-                    timecb(dt);
                 } catch (IOException e) {
                     System.out.println("Du har fucked op");
                 }
@@ -110,7 +110,5 @@ public class ftpInteraction {
 
     }
 
-    public double timecb(long time) {
-        return time;
-    }
+
 }
