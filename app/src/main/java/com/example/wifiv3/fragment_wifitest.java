@@ -42,8 +42,7 @@ public class fragment_wifitest extends Fragment implements DataSender {
     String BSSID;
     int TestType;
     // Fix this shit...
-    File file = new File(String.valueOf(getContext().getFilesDir()) +"/airtame");
-    ftpInteraction ftpCon = new ftpInteraction(file);
+
 
 
 
@@ -59,8 +58,11 @@ public class fragment_wifitest extends Fragment implements DataSender {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        File file = new File(String.valueOf(getContext().getFilesDir()) +"/airtame");
+        ftpInteraction ftpCon = new ftpInteraction(file);
 
         try {
+            ftpCon.login();
             ftpCon.SpeedTest();
             ftpCon.uploadtest();
             WifiScan();
@@ -100,15 +102,10 @@ public class fragment_wifitest extends Fragment implements DataSender {
         activity.ReplaceFragment();
         TestType = Testnumber;
 
-
-
-
-        if (activity != null) {
+        // sender til activity
             activity.WifiData(TestType, Download, Upload, BSSID, RSSI);
-        }
-        else{
-            System.out.println("Fejl i fragment");
-        }
+
+
 
 
 
@@ -125,10 +122,13 @@ public class fragment_wifitest extends Fragment implements DataSender {
 
     // Det funktionen activity kalder når denne fragment skal lave testen
     public void CallTest(int TestNumber){
+        File file = new File(String.valueOf(getContext().getFilesDir()) +"/airtame");
+        ftpInteraction ftpCon = new ftpInteraction(file);
 
         TestType = TestNumber;
 
         try {
+            ftpCon.login();
             ftpCon.SpeedTest();
             ftpCon.uploadtest();
             WifiScan();
@@ -138,4 +138,6 @@ public class fragment_wifitest extends Fragment implements DataSender {
         }
 
     }
+
+
 }

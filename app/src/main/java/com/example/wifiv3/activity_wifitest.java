@@ -54,6 +54,7 @@ public class activity_wifitest extends AppCompatActivity implements DataSender{
         // Hvis TestType = 1 så er det en Basis værdi måling. alt over TestType 1 bliver set som det samme af activty.
 
 
+
         if(ActiveTestType == 1){
             BasisTest();
             ActiveTestType ++;
@@ -100,7 +101,9 @@ public class activity_wifitest extends AppCompatActivity implements DataSender{
         //Laver instans af fragment_wifitest og kalder dens funktion CallTest.
         Fragment fragment1 = (fragment_wifitest) getSupportFragmentManager().findFragmentByTag("wifi");
         fragment_wifitest FragWifi = (fragment_wifitest) fragment1;
-        FragWifi.CallTest(ActiveTestType);
+        Bundle tempBundle = new Bundle();
+
+         FragWifi.onCreate(tempBundle);
     }
 
     // Bliver kaldt af fragment_result og bliver brugt til at gøre layout visible igen
