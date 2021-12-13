@@ -1,213 +1,153 @@
 package com.example.wifiv3;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.transition.Explode;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
-import org.apache.commons.net.ftp.FTPClient;
-
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.lang.reflect.Field;
-import java.util.concurrent.TimeUnit;
+import java.util.Objects;
 
-public class fragment_wifitest extends Fragment implements DataSender {
+import javax.xml.transform.Result;
 
-    public fragment_wifitest(){
-
-    }
-    FTPClient ftp = new FTPClient();
-    long Download;
-    long Upload;
-    long RSSI;
-    String BSSID;
-    int TestType;
+public class activity_wifitest extends AppCompatActivity implements DataSender{
+    private Button button;
+    ProgressBar spinner;
+    ImageView PictureOne;
+    ImageView PictureTwo;
+    ImageView PictureThree;
+    TextView Explainer;
+    int ActiveTestType;
 
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_test, parent, false);
-
-    }
-
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_wifitest);
+        button = (Button) findViewById(R.id.ScanButton);
+        spinner = (ProgressBar) findViewById(R.id.progressBar);
+        spinner.setVisibility(View.GONE);
+        PictureOne = (ImageView) findViewById(R.id.imageView2);
+        PictureTwo = (ImageView) findViewById(R.id.imageView3);
+        PictureThree = (ImageView) findViewById(R.id.imageView4);
+        Explainer = (TextView) findViewById(R.id.textView);
 
-        try {
-            SpeedTest();
-            uploadtest();
-            WifiScan();
-            SendToActivity(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        ActiveTestType = 1;
+
+
+    }
+
+
+    /// Dette er OnClick for Button
+    public void ScanStart(View view) {
+
+        // Der bliver skelnet mellem 4 forskellige testtyper. Som bliver brugt til at bestemme hvor tingene skal gemmes
+        // Hvis TestType = 1 så er det en Basis værdi måling. alt over TestType 1 bliver set som det samme af activty.
+
+
+        if(ActiveTestType == 1){
+            BasisTest();
+            ActiveTestType ++;
+        }
+        else {
+            NormalTest();
+            ActiveTestType ++;
+        }
+
         }
 
 
 
-        }
 
 
 
+    /// Når brugeren trykker på knappen for først gang bliver denne funktion kaldt
+    public void BasisTest(){
+        // fjerner alt tekst og billeder
+        spinner.setVisibility(View.VISIBLE);
+        button.setVisibility(View.GONE);
+        PictureOne.setVisibility(View.GONE);
+        PictureTwo.setVisibility(View.GONE);
+        PictureThree.setVisibility(View.GONE);
+        Explainer.setVisibility(View.GONE);
 
 
-    public void WifiScan(){
-        WifiManager WFM = (WifiManager) getContext().getSystemService(Context.WIFI_SERVICE);
-        WifiInfo WifiInfo = WFM.getConnectionInfo();
+        // Start fragment_result
+        FragmentTransaction ftTwo = getSupportFragmentManager().beginTransaction();
+        ftTwo.add(R.id.FragmentContainer, new fragment_result(), "RESULT");
+        ftTwo.addToBackStack(null);
+        ftTwo.commit();
 
-        BSSID = WifiInfo.getBSSID();
-        String SSID = WifiInfo.getSSID();
-        RSSI = WifiInfo.getRssi();
+        // Start fragment_wifitest og sæt dens View i container istedet for fragment_result
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        ft.replace(R.id.FragmentContainer, new fragment_wifitest(), "wifi");
+        ft.commit();
+
+    }
+    // når brugeren trykker på knappen alle andre gange bliver denne funktion kaldt
+
+    public void NormalTest(){
+        //Laver instans af fragment_wifitest og kalder dens funktion CallTest.
+        Fragment fragment1 = (fragment_wifitest) getSupportFragmentManager().findFragmentByTag("wifi");
+        fragment_wifitest FragWifi = (fragment_wifitest) fragment1;
+        FragWifi.CallTest(ActiveTestType);
+    }
+
+    // Bliver kaldt af fragment_result og bliver brugt til at gøre layout visible igen
+    public void SetLayout(){
+        Explainer.setVisibility(View.VISIBLE);
+        Explainer.setText("Gå nu hen til et sted hvor du bruger net meget, og tryk scan!");
+        button.setVisibility(View.VISIBLE);
+        button.setText("Scan");
+
+    }
 
 
-        }
+    // denne funktion bliver kaldt af fragment_wifitest og gør at fragment_result bliver sat ind i container
+    public void ReplaceFragment(){
 
+        spinner.setVisibility(View.GONE);
+        FragmentTransaction ftThree = getSupportFragmentManager().beginTransaction();
 
-
-
-
-    public void SpeedTest() throws InterruptedException {
-
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    ftp.connect("172.104.152.182",21);
-                    ftp.login("p1","comtek21p1b303b");
-                    ftp.enterLocalPassiveMode();
-                    File file = new File(String.valueOf(getContext().getFilesDir())+"/airtame");
-                    OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
-                    System.out.println("Started download test...");
-                    long begin = System.currentTimeMillis();
-                    ftp.retrieveFile("/airtame",out);
-                    long end = System.currentTimeMillis();
-                    long dt = end - begin;
-                    System.out.println("Downloaded it at the speed of " + (67.7/(dt/1000))*8 + " Mb/s");
-                    Download = (long) (67.7/(dt/1000))*8;
-                }
-                catch(IOException e){
-                    System.out.println("Du har fucked op");
-                }
-            }
-        });
-
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            System.out.println("Download thread borked");
-        }
-
+        ftThree.replace(R.id.FragmentContainer, new fragment_result(), "RESULT");
+        ftThree.addToBackStack(null);
+        ftThree.commit();
 
 
 
     }
 
 
-    public void uploadtest() throws InterruptedException {
-        Thread uploadthread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("Upload thread has started!!");
-                File file = new File(String.valueOf(getContext().getFilesDir()) + "/airtame");
-                try {
-                    InputStream fs = new BufferedInputStream(new FileInputStream(file));
-                    // ftp.setBufferSize(10240*10240);
-                    System.out.println("Milestone 1");
-                    long begin = System.currentTimeMillis();
-                    ftp.storeFile("/upload/airtame", fs);
-                    long end = System.currentTimeMillis();
-                    System.out.println("Milestone 2");
-                    long dt = end - begin;
-                    fs.close();
-                    System.out.println("OMG it has been sent at a speed of " + (67.7/(dt/1000))*8 + " Mb/s. What a chad.");
-                    Upload = (long) ((67.7/(dt/1000))*8);
-
-                } catch (IOException e) {
-                    System.out.println("Error");
-                    System.out.println(e);
-                }
-            }
-
-        });
-        uploadthread.start();
-
-
-
-      try {
-            uploadthread.join();
-        } catch (InterruptedException e) {
-            System.out.println("upload thread borked");
-        }
-
-
-    }
-
-
-    // det igennem denne funktion at den indsamlede data bliver sendt til
-    public void SendToActivity(int Testnumber){
-        activity_wifitest activity = (activity_wifitest) getActivity();
-        activity.ReplaceFragment();
-        TestType = Testnumber;
-
-
-
-
-        if (activity != null) {
-            activity.WifiData(TestType, Download, Upload, BSSID, RSSI);
-        }
-        else{
-            System.out.println("Fejl i fragment");
-        }
-
-
-
-
-
-    }
-
-
+    // Dette er funktionen hvori alt information bliver delt mellem activities og de 2 fragments
     @Override
     public void WifiData(int TestType, long Download, long Upload, String BSSID, long RSSI) {
+        System.out.println("Download er: "+Download+"Upload er: "+Upload+"BSSID er: "+BSSID+"RSSI er: "+RSSI);
+
+        Fragment fragment = (fragment_result) getSupportFragmentManager().findFragmentByTag("RESULT");
+        fragment_result FragRes = (fragment_result) fragment;
+
+        FragRes.WifiData(TestType, Download, Upload, BSSID, RSSI);
+
+
+
+
+
+
 
 
     }
 
-    // Det funktionen activity kalder når denne fragment skal lave testen
-    public void CallTest(int TestNumber){
 
-        TestType = TestNumber;
 
-        try {
-            SpeedTest();
-            uploadtest();
-            WifiScan();
-            SendToActivity(TestNumber);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-    }
 }
 
