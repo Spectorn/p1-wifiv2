@@ -95,6 +95,8 @@ public class fragment_result extends Fragment implements DataSender{
             case 2:
                 TestTypeResult = TestType; Download = Download; Upload = Upload; BSSID = BSSID; RSSI = RSSI;
                 FirstTest();
+                break;
+
 
 
         }
