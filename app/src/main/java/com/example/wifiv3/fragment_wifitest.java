@@ -96,7 +96,7 @@ public class fragment_wifitest extends Fragment implements DataSender {
 
     // Det funktionen activity kalder når denne fragment skal lave testen
     public void CallTest(int TestNumber){
-        File file = new File(String.valueOf(getContext().getFilesDir()) +"/airtame");
+        File file = new File(String.valueOf(getContext().getFilesDir()) +"/testPDF");
         ftpInteraction ftpCon = new ftpInteraction(file);
 
         TestType = TestNumber;
