@@ -17,7 +17,6 @@ import java.util.Arrays;
 
 import org.apache.commons.net.ftp.FTPClient;
 
-
 public class ftpInteraction {
     FTPClient ftp = new FTPClient();
     File file;
@@ -59,7 +58,7 @@ public class ftpInteraction {
                     OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
                     System.out.println("Started download test...");
                     long begin = System.currentTimeMillis();
-                    ftp.retrieveFile("/airtame", out);
+                    ftp.retrieveFile("/VNC", out);
                     long end = System.currentTimeMillis();
                     long dt = end - begin;
                     System.out.println("Downloaded it at the speed of " + (67.7 / (dt / 1000)) * 8 + " Mb/s");
@@ -92,7 +91,7 @@ public class ftpInteraction {
                     //ftp.setBufferSize(10240 * 10240);
                     System.out.println("Milestone 1");
                     long begin = System.currentTimeMillis();
-                    ftp.storeFile("/upload/airtame", fs);
+                    ftp.storeFile("/upload/VNC", fs);
                     long end = System.currentTimeMillis();
                     System.out.println("Milestone 2");
                     long dt = end - begin;

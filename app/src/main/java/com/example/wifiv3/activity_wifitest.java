@@ -56,7 +56,6 @@ public class activity_wifitest extends AppCompatActivity implements DataSender{
             NormalTest();
             ActiveTestType ++;
         }
-
     }
 
     /// Når brugeren trykker på knappen for først gang bliver denne funktion kaldt
