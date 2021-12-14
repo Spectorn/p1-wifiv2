@@ -26,7 +26,6 @@ public class ftpInteraction {
         file = files;
     }
 
-
     public void login() {
         Thread loginThread = new Thread(new Runnable() {
             @Override
@@ -48,7 +47,6 @@ public class ftpInteraction {
             System.out.println("Download thread borked");
         }
     }
-
 
     public void SpeedTest() throws InterruptedException {
         Thread thread = new Thread(new Runnable() {
@@ -117,51 +115,5 @@ public class ftpInteraction {
         } catch (InterruptedException e) {
             System.out.println("upload thread borked");
         }
-
-
     }
-    ////////
-    ///////
-    /////// This function is taken from https://github.com/ashishvshenoy/iperf-java/blob/master/iperf/src/iperf/Iperfer.java
-    ///////
-    ///////
-    public void iperf() {
-        String hostName = "172.104.152.182";
-        int portNumber = 5201;
-        int time = 5;
-
-        try (
-                Socket tcpSocket = new Socket(hostName, portNumber);
-                PrintWriter out =
-                        new PrintWriter(tcpSocket.getOutputStream(), true);
-                BufferedReader in =
-                        new BufferedReader(
-                                new InputStreamReader(tcpSocket.getInputStream()));
-        ) {
-            long totalTime = (long) (time*Math.pow(10,9));
-            long startTime = System.nanoTime();
-            boolean toFinish = false;
-            long totalNumberOfBytes = 0;
-            while(!toFinish){
-                byte[] dataChunk = new byte[1000];
-                totalNumberOfBytes+=(long)1000;
-                Arrays.fill(dataChunk, (byte)0);
-                out.println(dataChunk);
-                in.readLine();
-                toFinish = (System.nanoTime() - startTime >= totalTime);
-            }
-            int sentInKB = (int) (totalNumberOfBytes/1024);
-            long rate = (totalNumberOfBytes/(long)Math.pow(2,20 ))/time;
-            System.out.print("sent="+sentInKB+"KB rate="+rate+"Mbps");
-        } catch (UnknownHostException e) {
-            System.err.println("Don't know about host " + hostName);
-            System.exit(1);
-        } catch (IOException e) {
-            System.err.println("Couldn't get I/O for the connection to " +
-                    hostName);
-            System.exit(1);
-        }
-    }
-
-
 }

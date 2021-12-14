@@ -15,7 +15,6 @@ public class fragment_result extends Fragment implements DataSender{
     public fragment_result(){
     }
 
-
     long BasisDownload;
     long BasisUpload;
     String BasisBSSID;
@@ -40,15 +39,9 @@ public class fragment_result extends Fragment implements DataSender{
 
     }
 
-
-
-
     @Override
-
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
     }
 
     public void BasisResult(){
@@ -62,11 +55,9 @@ public class fragment_result extends Fragment implements DataSender{
         }
     }
 
-
     public void ClearLayout(){
         System.out.println("layout clear");
     }
-
 
     // Dette er funktionen hvori alt information bliver delt mellem activities og de 2 fragments
     @Override
@@ -76,11 +67,7 @@ public class fragment_result extends Fragment implements DataSender{
             case 1:
                 TestTypeResult = TestType; Download = BasisDownload; Upload = BasisUpload; BSSID = BasisBSSID; RSSI = BasisRSSI;
                 BasisResult();
-
-
         }
-
-
     }
 }
 

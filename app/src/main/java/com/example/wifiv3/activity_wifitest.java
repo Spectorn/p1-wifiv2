@@ -26,8 +26,6 @@ public class activity_wifitest extends AppCompatActivity implements DataSender{
     TextView Explainer;
     int ActiveTestType;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -42,8 +40,6 @@ public class activity_wifitest extends AppCompatActivity implements DataSender{
         Explainer = (TextView) findViewById(R.id.textView);
 
         ActiveTestType = 1;
-
-
     }
 
 
@@ -53,22 +49,15 @@ public class activity_wifitest extends AppCompatActivity implements DataSender{
         // Der bliver skelnet mellem 4 forskellige testtyper. Som bliver brugt til at bestemme hvor tingene skal gemmes
         // Hvis TestType = 1 så er det en Basis værdi måling. alt over TestType 1 bliver set som det samme af activty.
 
-
         if(ActiveTestType == 1){
             BasisTest();
             ActiveTestType ++;
-        }
-        else {
+        } else {
             NormalTest();
             ActiveTestType ++;
         }
 
-        }
-
-
-
-
-
+    }
 
     /// Når brugeren trykker på knappen for først gang bliver denne funktion kaldt
     public void BasisTest(){
@@ -79,7 +68,6 @@ public class activity_wifitest extends AppCompatActivity implements DataSender{
         PictureTwo.setVisibility(View.GONE);
         PictureThree.setVisibility(View.GONE);
         Explainer.setVisibility(View.GONE);
-
 
         // Start fragment_result
         FragmentTransaction ftTwo = getSupportFragmentManager().beginTransaction();
@@ -109,9 +97,7 @@ public class activity_wifitest extends AppCompatActivity implements DataSender{
         Explainer.setText("Gå nu hen til et sted hvor du bruger net meget, og tryk scan!");
         button.setVisibility(View.VISIBLE);
         button.setText("Scan");
-
     }
-
 
     // denne funktion bliver kaldt af fragment_wifitest og gør at fragment_result bliver sat ind i container
     public void ReplaceFragment(){
@@ -122,11 +108,7 @@ public class activity_wifitest extends AppCompatActivity implements DataSender{
         ftThree.replace(R.id.FragmentContainer, new fragment_result(), "RESULT");
         ftThree.addToBackStack(null);
         ftThree.commit();
-
-
-
     }
-
 
     // Dette er funktionen hvori alt information bliver delt mellem activities og de 2 fragments
     @Override
@@ -137,17 +119,6 @@ public class activity_wifitest extends AppCompatActivity implements DataSender{
         fragment_result FragRes = (fragment_result) fragment;
 
         FragRes.WifiData(TestType, Download, Upload, BSSID, RSSI);
-
-
-
-
-
-
-
-
     }
-
-
-
 }
 
