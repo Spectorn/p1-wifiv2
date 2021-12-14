@@ -46,15 +46,12 @@ public class fragment_wifitest extends Fragment implements DataSender {
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
         return inflater.inflate(R.layout.fragment_test, parent, false);
-
     }
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        File file = new File(String.valueOf(getContext().getFilesDir()) +"/airtame");
+        File file = new File(String.valueOf(getContext().getFilesDir()) +"/VNC");
         ftpInteraction ftpCon = new ftpInteraction(file);
 
         try {
@@ -91,7 +88,6 @@ public class fragment_wifitest extends Fragment implements DataSender {
             System.out.println("Fejl i fragment");
         }
     }
-
 
     @Override
     public void WifiData(int TestType, long Download, long Upload, String BSSID, long RSSI) {
