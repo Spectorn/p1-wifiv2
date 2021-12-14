@@ -15,16 +15,17 @@ public class fragment_result extends Fragment implements DataSender{
     public fragment_result(){
     }
 
+
     long BasisDownload;
     long BasisUpload;
     String BasisBSSID;
     long BasisRSSI;
 
     int TestTypeResult;
-    long R_Download;
-    long R_Upload;
-    String R_BSSID;
-    long R_RSSI;
+    long Download;
+    long Upload;
+    String BSSID;
+    long RSSI;
     TextView Info;
 
 
@@ -39,9 +40,15 @@ public class fragment_result extends Fragment implements DataSender{
 
     }
 
+
+
+
     @Override
+
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
     }
 
     public void BasisResult(){
@@ -55,9 +62,24 @@ public class fragment_result extends Fragment implements DataSender{
         }
     }
 
+    public void FirstTest(){
+        int DownloadScore;
+        WifiInformation TestOne = new WifiInformation(Download, Upload, RSSI, BasisDownload, BasisUpload, BasisRSSI);
+        DownloadScore = TestOne.CheckDownload();
+
+
+
+
+
+    }
+
+
+
     public void ClearLayout(){
+
         System.out.println("layout clear");
     }
+
 
     // Dette er funktionen hvori alt information bliver delt mellem activities og de 2 fragments
     @Override
@@ -67,7 +89,14 @@ public class fragment_result extends Fragment implements DataSender{
             case 1:
                 TestTypeResult = TestType; Download = BasisDownload; Upload = BasisUpload; BSSID = BasisBSSID; RSSI = BasisRSSI;
                 BasisResult();
+            case 2:
+                TestTypeResult = TestType; Download = Download; Upload = Upload; BSSID = BSSID; RSSI = RSSI;
+                FirstTest();
+
+
         }
+
+
     }
 }
 
