@@ -29,6 +29,7 @@ public class ftpInteraction {
                 try {
                     System.out.println("Loggin in");
                     ftp.connect("172.104.152.182", 21);
+
                     ftp.login("p1", "comtek21p1b303b");
                     ftp.enterLocalPassiveMode();
                 } catch (IOException e) {
@@ -54,7 +55,7 @@ public class ftpInteraction {
                     OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
                     System.out.println("Started download test...");
                     long begin = System.currentTimeMillis();
-                    ftp.retrieveFile("/VNC", out);
+                    ftp.retrieveFile("/testPDF", out);
                     long end = System.currentTimeMillis();
                     long dt = end - begin;
                     System.out.println("Downloaded it at the speed of " + (67.7 / (dt / 1000)) * 8 + " Mb/s");
@@ -80,14 +81,12 @@ public class ftpInteraction {
             @Override
             public void run() {
                 System.out.println("Upload thread has started!!");
-                //File file = new File(String.valueOf(getContext().getFilesDir()) + "/airtame");
                 try {
 
                     InputStream fs = new BufferedInputStream(new FileInputStream(file));
-                    //ftp.setBufferSize(10240 * 10240);
                     System.out.println("Milestone 1");
                     long begin = System.currentTimeMillis();
-                    ftp.storeFile("/upload/VNC", fs);
+                    ftp.storeFile("/upload/testPDF", fs);
                     long end = System.currentTimeMillis();
                     System.out.println("Milestone 2");
                     long dt = end - begin;
@@ -97,6 +96,7 @@ public class ftpInteraction {
 
                     // Needs a CB f
                     // unction
+                    ftp.disconnect();
                 } catch (IOException e) {
                     System.out.println("Error");
                     System.out.println(e);
@@ -109,6 +109,7 @@ public class ftpInteraction {
 
         try {
             uploadthread.join();
+
         } catch (InterruptedException e) {
             System.out.println("upload thread borked");
         }
