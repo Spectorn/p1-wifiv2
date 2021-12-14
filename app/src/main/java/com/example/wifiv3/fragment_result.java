@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 
 public class fragment_result extends Fragment implements DataSender{
 
-
     public fragment_result(){
     }
 
@@ -28,7 +27,6 @@ public class fragment_result extends Fragment implements DataSender{
     long R_RSSI;
     TextView Info;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LayoutInflater lf = getActivity().getLayoutInflater();
@@ -37,18 +35,13 @@ public class fragment_result extends Fragment implements DataSender{
         ImageView Check = (ImageView) view.findViewById(R.id.Check);
 
         return view;
-
     }
-
-
-
 
     @Override
 
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
     }
 
     public void BasisResult(){
@@ -68,21 +61,11 @@ public class fragment_result extends Fragment implements DataSender{
         WifiInformation TestOne = new WifiInformation(R_Download, R_Upload, R_RSSI, BasisDownload, BasisUpload, BasisRSSI);
         DownloadScore = TestOne.CheckDownload();
         UploadScore = TestOne.CheckUpload();
-
-
-
-
-
-
     }
-
-
 
     public void ClearLayout(){
-
         System.out.println("layout clear");
     }
-
 
     // Dette er funktionen hvori alt information bliver delt mellem activities og de 2 fragments
     @Override
@@ -91,19 +74,13 @@ public class fragment_result extends Fragment implements DataSender{
         switch(TestType){
             case 1:
                 TestTypeResult = TestType; Download = BasisDownload; Upload = BasisUpload; BSSID = BasisBSSID; RSSI = BasisRSSI;
-
                 BasisResult();
                 break;
             case 2:
                 TestTypeResult = TestType; R_Download = Download; R_Upload = Upload; R_BSSID = BSSID; R_RSSI = RSSI;
-
                 FirstTest();
                 break;
-
-
         }
-
-
     }
 }
 

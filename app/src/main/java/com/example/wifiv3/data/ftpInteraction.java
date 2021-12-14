@@ -32,6 +32,8 @@ public class ftpInteraction {
 
                     ftp.login("p1", "comtek21p1b303b");
                     ftp.enterLocalPassiveMode();
+                    ftp.setBufferSize(1024*1024);
+                    System.out.println("Buffer size it: " + ftp.getBufferSize());
                 } catch (IOException e) {
                     System.out.println("Login failed...");
                 }
