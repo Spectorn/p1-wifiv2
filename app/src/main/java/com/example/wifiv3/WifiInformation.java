@@ -22,6 +22,7 @@ public class WifiInformation {
     public int CheckDownload(){
 
         int Score = 100;
+        int Result;
         // 3mbps anses af mange for at være minimum til både streaming og gaming.
         if(Download < 3){
             Score = -100;
@@ -42,8 +43,10 @@ public class WifiInformation {
         else if (Download < 75) {
             Score = -5;
         }
+        Result = DownloadToBasis(Score);
+        System.out.println("Download Result er:" + Result);
 
-        return Score;
+        return Result;
 
 
 
@@ -51,18 +54,74 @@ public class WifiInformation {
     }
 
     public int DownloadToBasis(int Score){
-
+        long Diff = BasisDownload - Download;
+        // hvis der er et fald på mere end 50% så er det et problem
+        if (Diff > BasisDownload/2 ){
+            Score = -50;
+        }
+        else if (Diff > BasisDownload/3){
+            Score = -30;
+        }
+        else if (Diff > BasisDownload/4){
+            Score = -15;
+        }
         // Hvis testen bliver målt højere end basis er der ikke sket et fald og derfor må internettet være perfekt.
-        if(Download > BasisDownload){
-            return Score;
+        else {
+            Score = +1;
+        }
+        return  Score;
+
+    }
+
+
+    public int CheckUpload(){
+        int Score = 100;
+        int Result;
+
+        /// Upload behøves kun at være en 1/10 af download til det meste brug
+        if(Upload < 2){
+            Score = -80;
         }
 
+        else if (Upload < 5 && Upload > 2) {
+            Score = -40;
+        }
+        else if (Upload < 10 && Upload > 5){
+            Score = -20;
+        }
+        else if (Upload < 25 && Upload > 10){
+            Score = -10;
+        }
+
+        Result = UploadToBasis(Score);
+        System.out.println("Upload Result er:" + Result);
+        return Result;
+    }
+
+    public int UploadToBasis(int Score){
+        long Diff = BasisUpload - Download;
+        // hvis der er et fald på mere end 50% så er det et problem
+        if (Diff > BasisUpload/2 ){
+            Score = -50;
+        }
+        else if (Diff > BasisUpload/3){
+            Score = -30;
+        }
+        else if (Diff > BasisUpload/4){
+            Score = -15;
+        }
+        // Hvis testen bliver målt højere end basis er der ikke sket et fald og derfor må internettet være perfekt.
+        else {
+            Score = +10;
+        }
         return  Score;
 
 
 
 
     }
+
+
 
 
 

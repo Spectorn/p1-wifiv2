@@ -2,24 +2,20 @@ package com.example.wifiv3.data;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.Arrays;
 
 import org.apache.commons.net.ftp.FTPClient;
 
 public class ftpInteraction {
     FTPClient ftp = new FTPClient();
     File file;
+    long Download;
+    long Upload;
 
     public ftpInteraction(File files) {
         file = files;
@@ -62,7 +58,7 @@ public class ftpInteraction {
                     long end = System.currentTimeMillis();
                     long dt = end - begin;
                     System.out.println("Downloaded it at the speed of " + (67.7 / (dt / 1000)) * 8 + " Mb/s");
-                    long Download = (long) ((67.7 / (dt / 1000)) * 8);
+                    Download = (long) ((67.7 / (dt / 1000)) * 8);
 
                     // Needs a CB function
                 } catch (IOException e) {
@@ -97,7 +93,7 @@ public class ftpInteraction {
                     long dt = end - begin;
                     fs.close();
                     System.out.println("OMG it has been sent at a speed of " + (67.7 / (dt / 1000)) * 8 + " Mb/s. What a chad.");
-                    long Upload = (long) ((67.7 / (dt / 1000)) * 8);
+                    Upload = (long) ((67.7 / (dt / 1000)) * 8);
 
                     // Needs a CB f
                     // unction
@@ -116,9 +112,12 @@ public class ftpInteraction {
         } catch (InterruptedException e) {
             System.out.println("upload thread borked");
         }
-
-
     }
+
+
+
+
+
     /*
     ////////
     ///////
@@ -164,4 +163,14 @@ public class ftpInteraction {
     }
 */
 
-}
+
+        public long getDownload() {
+            return Download;
+        }
+
+        public long getUpload() {
+            return Upload;
+        }
+    }
+
+

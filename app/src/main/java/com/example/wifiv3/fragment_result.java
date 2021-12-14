@@ -64,8 +64,11 @@ public class fragment_result extends Fragment implements DataSender{
 
     public void FirstTest(){
         int DownloadScore;
+        int UploadScore;
         WifiInformation TestOne = new WifiInformation(Download, Upload, RSSI, BasisDownload, BasisUpload, BasisRSSI);
         DownloadScore = TestOne.CheckDownload();
+        UploadScore = TestOne.CheckUpload();
+
 
 
 
