@@ -3,12 +3,12 @@ package com.example.wifiv3;
 
 
 public class WifiInformation {
-    private long Download;
-    private long Upload;
-    private long RSSI;
-    private long BasisDownload;
-    private long BasisUpload;
-    private long BasisRSSI;
+    long Download;
+    long Upload;
+    long RSSI;
+    long BasisDownload;
+    long BasisUpload;
+    long BasisRSSI;
 
     public WifiInformation(long download, long upload, long RSSI, long basisDownload, long basisUpload, long basisRSSI) {
         Download = download;
@@ -20,6 +20,7 @@ public class WifiInformation {
     }
 
     public int CheckDownload(){
+        System.out.println(Download +BasisDownload+Upload+BasisUpload);
 
         int Score = 100;
         int Result;
@@ -43,6 +44,7 @@ public class WifiInformation {
         else if (Download < 75) {
             Score = -5;
         }
+        System.out.println("Score efter første test" + Score);
         Result = DownloadToBasis(Score);
         System.out.println("Download Result er:" + Result);
 
@@ -54,6 +56,7 @@ public class WifiInformation {
     }
 
     public int DownloadToBasis(int Score){
+        System.out.println("Score i anden test" + Score);
         long Diff = BasisDownload - Download;
         // hvis der er et fald på mere end 50% så er det et problem
         if (Diff > BasisDownload/2 ){
@@ -69,6 +72,7 @@ public class WifiInformation {
         else {
             Score = +1;
         }
+
         return  Score;
 
     }

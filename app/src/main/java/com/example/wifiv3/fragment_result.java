@@ -22,10 +22,10 @@ public class fragment_result extends Fragment implements DataSender{
     long BasisRSSI;
 
     int TestTypeResult;
-    long Download;
-    long Upload;
-    String BSSID;
-    long RSSI;
+    long R_Download;
+    long R_Upload;
+    String R_BSSID;
+    long R_RSSI;
     TextView Info;
 
 
@@ -65,7 +65,7 @@ public class fragment_result extends Fragment implements DataSender{
     public void FirstTest(){
         int DownloadScore;
         int UploadScore;
-        WifiInformation TestOne = new WifiInformation(Download, Upload, RSSI, BasisDownload, BasisUpload, BasisRSSI);
+        WifiInformation TestOne = new WifiInformation(R_Download, R_Upload, R_RSSI, BasisDownload, BasisUpload, BasisRSSI);
         DownloadScore = TestOne.CheckDownload();
         UploadScore = TestOne.CheckUpload();
 
@@ -87,14 +87,19 @@ public class fragment_result extends Fragment implements DataSender{
     // Dette er funktionen hvori alt information bliver delt mellem activities og de 2 fragments
     @Override
     public void WifiData(int TestType,long Download, long Upload, String BSSID, long RSSI) {
-        System.out.println("Test typen er: "+TestType+"Download er: "+Download+"Upload er: "+Upload+"BSSID er: "+BSSID+"RSSI er: "+RSSI + "Hilsen fragment to");
+        System.out.println("Test typen er: "+TestType+"Download er: "+Download+"Upload er: "+Upload+"BSSID er: "+BSSID+"RSSI er: "+RSSI + "Sendt fra fragment result");
         switch(TestType){
             case 1:
                 TestTypeResult = TestType; Download = BasisDownload; Upload = BasisUpload; BSSID = BasisBSSID; RSSI = BasisRSSI;
+                System.out.println("Kører case 1");
                 BasisResult();
+                break;
             case 2:
-                TestTypeResult = TestType; Download = Download; Upload = Upload; BSSID = BSSID; RSSI = RSSI;
+                TestTypeResult = TestType; R_Download = Download; R_Upload = Upload; R_BSSID = BSSID; R_RSSI = RSSI;
+                System.out.println(R_Download + "Download i testcase 2" + R_Upload);
+
                 FirstTest();
+                break;
 
 
         }
