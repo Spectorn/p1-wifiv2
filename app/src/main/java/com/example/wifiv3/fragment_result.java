@@ -91,12 +91,11 @@ public class fragment_result extends Fragment implements DataSender{
         switch(TestType){
             case 1:
                 TestTypeResult = TestType; Download = BasisDownload; Upload = BasisUpload; BSSID = BasisBSSID; RSSI = BasisRSSI;
-                System.out.println("Kører case 1");
+
                 BasisResult();
                 break;
             case 2:
                 TestTypeResult = TestType; R_Download = Download; R_Upload = Upload; R_BSSID = BSSID; R_RSSI = RSSI;
-                System.out.println(R_Download + "Download i testcase 2" + R_Upload);
 
                 FirstTest();
                 break;
