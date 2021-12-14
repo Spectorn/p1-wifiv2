@@ -32,7 +32,7 @@ import java.io.*;
 
 public class fragment_wifitest extends Fragment implements DataSender {
 
-    public fragment_wifitest() {
+    public fragment_wifitest(){
 
     }
 
@@ -41,6 +41,9 @@ public class fragment_wifitest extends Fragment implements DataSender {
     long RSSI;
     String BSSID;
     int TestType;
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -58,6 +61,7 @@ public class fragment_wifitest extends Fragment implements DataSender {
         ftpInteraction ftpCon = new ftpInteraction(file);
 
         try {
+            //ftpCon.iperf();
             ftpCon.login();
             ftpCon.SpeedTest();
             ftpCon.uploadtest();
@@ -66,7 +70,13 @@ public class fragment_wifitest extends Fragment implements DataSender {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
+
+
+
+        }
+
+
+
 
 
     public void WifiScan(){
@@ -76,7 +86,15 @@ public class fragment_wifitest extends Fragment implements DataSender {
         BSSID = WifiInfo.getBSSID();
         String SSID = WifiInfo.getSSID();
         RSSI = WifiInfo.getRssi();
+
+
         }
+
+
+
+
+
+
 
     // det igennem denne funktion at den indsamlede data bliver sendt til
     public void SendToActivity(int Testnumber){
@@ -84,17 +102,26 @@ public class fragment_wifitest extends Fragment implements DataSender {
         activity.ReplaceFragment();
         TestType = Testnumber;
 
+
+
+
         if (activity != null) {
             activity.WifiData(TestType, Download, Upload, BSSID, RSSI);
         }
         else{
             System.out.println("Fejl i fragment");
         }
+
+
+
+
+
     }
 
 
     @Override
     public void WifiData(int TestType, long Download, long Upload, String BSSID, long RSSI) {
+
 
     }
 
@@ -114,5 +141,6 @@ public class fragment_wifitest extends Fragment implements DataSender {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
     }
 }
