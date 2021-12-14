@@ -111,6 +111,35 @@ public class WifiInformation {
         }
         return  Score;
     }
+
+    public int RankingDownload(int Score){
+        int Ranking;
+
+        if( Score >= 75){
+            Ranking = 1;
+            return Ranking;
+        }
+        else if (Score >= 50 && Score < 75){
+            Ranking = 2;
+            return Ranking;
+        }
+        Ranking = 3;
+        return Ranking;
+    }
+
+    public int RankingUpload(int Score){
+        int Ranking;
+
+        if( Score >= 75){
+            Ranking = 1;
+            return Ranking;
+        }
+        else if (Score >= 50 && Score < 75){
+            Ranking = 2;
+            return Ranking;
+        }
+        Ranking = 3;
+        return Ranking;
 }
 
 
