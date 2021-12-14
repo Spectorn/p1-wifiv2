@@ -118,17 +118,7 @@ public class WifiInformation {
             Score = Score +1;
         }
         return  Score;
-
-
-
-
     }
-
-
-
-
-
-
 }
 
 
