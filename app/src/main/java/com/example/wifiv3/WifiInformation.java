@@ -1,6 +1,7 @@
 package com.example.wifiv3;
 
-
+import java.util.NavigableMap;
+import java.util.TreeMap;
 
 public class WifiInformation {
     long Download;
@@ -22,42 +23,28 @@ public class WifiInformation {
     public int CheckDownload(){
         System.out.println(Download +BasisDownload+Upload+BasisUpload);
 
-        int Score = 100;
+        // Added 185 to counter scoring init
+        int Score = 285;
         int Result;
-        // 3mbps anses af mange for at være minimum til både streaming og gaming.
-        if(Download < 3){
-            Score -= 100;
-        }
-        // 25mbps er hvad Netflix anbefaler for 4k streaming,
-        else if(Download < 25){
-            Score -= 60;
-        }
-        // 8k streaming kræver 50 mbps
-        else if(Download < 50){
-            Score -= 30;
-        }
 
-        // omkring 50 mbps anses af flere til at være tilstrækkeligt for en normal familie.
-        else if (Download < 75) {
-            Score -= 15;
-        }
-        else if (Download < 75) {
-            Score -= 5;
-        }
+        final NavigableMap<Double, Integer> scoring = new TreeMap<Double, Integer>();
+        scoring.put(0.0, Score -= 100);
+        scoring.put(3.0, Score -= 80);
+        scoring.put(25.0, Score -= 60);
+        scoring.put(50.0, Score -= 30);
+        scoring.put(800.0, Score -= 15);
+
         System.out.println("Score efter første test" + Score);
-        Result = DownloadToBasis(Score);
+        Result = DownloadToBasis(scoring.get(scoring.floorKey((double) Download)));
         System.out.println("Download Result er:" + Result);
 
         return Result;
-
-
-
-
     }
 
     public int DownloadToBasis(int Score){
         long Diff = BasisDownload - Download;
         // hvis der er et fald på mere end 50% så er det et problem
+
         if (Diff > BasisDownload/2 ){
             Score -= 50;
         }
@@ -69,30 +56,24 @@ public class WifiInformation {
         }
 
         return  Score;
-
     }
 
-
     public int CheckUpload(){
-        int Score = 100;
+        // Added 250 to counter the subtraction in scoring init
+        int Score = 350;
         int Result;
+        System.out.println("Upload er LIGE NU " + Score);
 
-        /// Upload behøves kun at være en 1/10 af download til det meste brug
-        if(Upload < 2){
-            Score -= 80;
-        }
+        final NavigableMap<Double, Integer> scoring = new TreeMap<Double, Integer>();
+        scoring.put(0.0, Score -= 100);
+        scoring.put(2.0, Score -= 80);
+        scoring.put(5.0, Score -= 40);
+        scoring.put(10.0, Score -= 20);
+        scoring.put(25.0, Score -= 10);
+        System.out.println("Upload er   !!!!!!!!!!!!!!!!!! " + Upload);
+        System.out.println("Upload er HER EFTER " + Score);
 
-        else if (Upload < 5 && Upload > 2) {
-            Score -= 40;
-        }
-        else if (Upload < 10 && Upload > 5){
-            Score -= 20;
-        }
-        else if (Upload < 25 && Upload > 10){
-            Score -= 10;
-        }
-
-        Result = UploadToBasis(Score);
+        Result = UploadToBasis(scoring.get(scoring.floorKey((double) Upload)));
         System.out.println("Upload Result er:" + Result);
         return Result;
     }
