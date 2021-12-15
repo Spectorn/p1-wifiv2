@@ -20,8 +20,8 @@ public class WifiInformation {
         BasisRSSI = basisRSSI;
     }
 
-    public int CheckDownload(){
-        System.out.println(Download +BasisDownload+Upload+BasisUpload);
+    public int CheckDownload() {
+        System.out.println(Download + BasisDownload + Upload + BasisUpload);
 
         // Added 185 to counter scoring init
         int Score = 285;
@@ -41,24 +41,22 @@ public class WifiInformation {
         return Result;
     }
 
-    public int DownloadToBasis(int Score){
+    public int DownloadToBasis(int Score) {
         long Diff = BasisDownload - Download;
         // hvis der er et fald på mere end 50% så er det et problem
 
-        if (Diff > BasisDownload/2 ){
+        if (Diff > BasisDownload / 2) {
             Score -= 50;
-        }
-        else if (Diff > BasisDownload/3){
+        } else if (Diff > BasisDownload / 3) {
             Score -= 30;
-        }
-        else if (Diff > BasisDownload/4){
+        } else if (Diff > BasisDownload / 4) {
             Score -= 15;
         }
 
-        return  Score;
+        return Score;
     }
 
-    public int CheckUpload(){
+    public int CheckUpload() {
         // Added 250 to counter the subtraction in scoring init
         int Score = 350;
         int Result;
@@ -78,29 +76,26 @@ public class WifiInformation {
         return Result;
     }
 
-    public int UploadToBasis(int Score){
+    public int UploadToBasis(int Score) {
         long Diff = BasisUpload - Download;
         // hvis der er et fald på mere end 50% så er det et problem
-        if (Diff > BasisUpload/2 ){
+        if (Diff > BasisUpload / 2) {
             Score -= 50;
-        }
-        else if (Diff > BasisUpload/3){
+        } else if (Diff > BasisUpload / 3) {
             Score -= 30;
-        }
-        else if (Diff > BasisUpload/4){
+        } else if (Diff > BasisUpload / 4) {
             Score -= 15;
         }
-        return  Score;
+        return Score;
     }
 
-    public int RankingDownload(int Score){
+    public int RankingDownload(int Score) {
         int Ranking;
 
-        if( Score >= 75){
+        if (Score >= 75) {
             Ranking = 1;
             return Ranking;
-        }
-        else if (Score >= 50 && Score < 75){
+        } else if (Score >= 50 && Score < 75) {
             Ranking = 2;
             return Ranking;
         }
@@ -108,19 +103,19 @@ public class WifiInformation {
         return Ranking;
     }
 
-    public int RankingUpload(int Score){
+    public int RankingUpload(int Score) {
         int Ranking;
 
-        if( Score >= 75){
+        if (Score >= 75) {
             Ranking = 1;
             return Ranking;
-        }
-        else if (Score >= 50 && Score < 75){
+        } else if (Score >= 50 && Score < 75) {
             Ranking = 2;
             return Ranking;
         }
         Ranking = 3;
         return Ranking;
+    }
 }
 
 
