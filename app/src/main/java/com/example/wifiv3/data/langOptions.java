@@ -53,7 +53,6 @@ public class langOptions {
                 changeLanguage(findViewById(R.id.danishBtn));
             }
 
-
         } catch (IOException e) {
             System.out.println("Oh no... couldn't read from the file");
         } finally {
@@ -65,7 +64,6 @@ public class langOptions {
                 }
             }
         }
-
     }
 
 
