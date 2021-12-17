@@ -16,7 +16,6 @@ public class ftpInteraction {
     File file;
     long Download;
     long Upload;
-
     public ftpInteraction(File files) {
         file = files;
     }
