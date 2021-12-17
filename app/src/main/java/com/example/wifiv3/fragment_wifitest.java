@@ -28,6 +28,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.io.*;
@@ -87,17 +89,17 @@ public class fragment_wifitest extends Fragment implements DataSender {
         BSSID = WifiInfo.getBSSID();
         String SSID = WifiInfo.getSSID();
         RSSI = WifiInfo.getRssi();
-        boolean success = WFM.startScan();
 
-        if (success) {
-            System.out.println("It went through!!");
-            List<ScanResult> result = WFM.getScanResults();
+        WFM.startScan();
+        List<ScanResult> result = WFM.getScanResults();
 
-            for (ScanResult item : result) {
-                System.out.println(item);
-            }
+        //System.out.println("Bruh 1");
+        //System.out.println(Arrays.toString(result.toArray()));
+        //System.out.println("Bruh 2");
+
+        for (ScanResult network : result) {
+            System.out.println(network.SSID + " " + network.BSSID + " " + network.frequency);
         }
-        System.out.println("Did it go through??????????????????????????????????++");
     }
 
 
