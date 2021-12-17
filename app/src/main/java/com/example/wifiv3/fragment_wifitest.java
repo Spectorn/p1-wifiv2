@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.wifi.ScanResult;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.io.*;
 
@@ -85,9 +87,18 @@ public class fragment_wifitest extends Fragment implements DataSender {
         BSSID = WifiInfo.getBSSID();
         String SSID = WifiInfo.getSSID();
         RSSI = WifiInfo.getRssi();
+        boolean success = WFM.startScan();
 
+        if (success) {
+            System.out.println("It went through!!");
+            List<ScanResult> result = WFM.getScanResults();
 
+            for (ScanResult item : result) {
+                System.out.println(item);
+            }
         }
+        System.out.println("Did it go through??????????????????????????????????++");
+    }
 
 
 
@@ -101,25 +112,16 @@ public class fragment_wifitest extends Fragment implements DataSender {
         activity.ReplaceFragment();
         TestType = Testnumber;
 
-
-
-
         if (activity != null) {
             activity.WifiData(TestType, Download, Upload, BSSID, RSSI);
         }
         else{
             System.out.println("Fejl i fragment");
         }
-
-
-
-
-
     }
 
     @Override
     public void WifiData(int TestType, long Download, long Upload, String BSSID, long RSSI) {
-
 
     }
 
@@ -141,6 +143,5 @@ public class fragment_wifitest extends Fragment implements DataSender {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 }
