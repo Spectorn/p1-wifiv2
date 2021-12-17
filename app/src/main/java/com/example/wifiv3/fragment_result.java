@@ -1,9 +1,11 @@
 package com.example.wifiv3;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,13 +28,19 @@ public class fragment_result extends Fragment implements DataSender{
     String R_BSSID;
     long R_RSSI;
     TextView Info;
+    Button button;
+    Button buttonOne;
+    ImageView Check;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LayoutInflater lf = getActivity().getLayoutInflater();
         View view = lf.inflate(R.layout.fragment_results, container, false);
         TextView Info = (TextView) view.findViewById(R.id.InfoText);
-        ImageView Check = (ImageView) view.findViewById(R.id.Check);
+        Check = (ImageView) view.findViewById(R.id.Check);
+        button = (Button) view.findViewById(R.id.button);
+        buttonOne = (Button) view.findViewById(R.id.button2);
 
         return view;
     }
@@ -42,31 +50,57 @@ public class fragment_result extends Fragment implements DataSender{
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+
+
     }
 
     public void BasisResult(){
         System.out.println("Basis værdier er sat");
         activity_wifitest activity = (activity_wifitest) getActivity();
-        if (activity != null) {
             activity.SetLayout();
-        }
-        else{
-            System.out.println("FEJL I RESULT");
-        }
+
     }
 
     public void FirstTest(){
-        int DownloadScore;
-        int UploadScore;
+        int DownloadRank;
+        int UploadRank;
         int Ranking;
         WifiInformation TestOne = new WifiInformation(R_Download, R_Upload, R_RSSI, BasisDownload, BasisUpload, BasisRSSI);
-        DownloadScore = TestOne.CheckDownload();
-        UploadScore = TestOne.CheckUpload();
-        Ranking = TestOne.RankingDownload(DownloadScore);
+        DownloadRank = TestOne.CheckDownload();
+        UploadRank = TestOne.CheckUpload();
+        Ranking = TestOne.FinalRank(DownloadRank, UploadRank);
+        System.out.println(Ranking);
+        switch(Ranking){
+            case 1:
+                GoodResult();
+                System.out.println("Kører GoodResult");
+                break;
+        }
+        activity_wifitest activity = (activity_wifitest) getActivity();
+        activity.SetLayout();
+
+
+
     }
+
+
 
     public void ClearLayout(){
         System.out.println("layout clear");
+    }
+
+    public void GoodResult(){
+        Check.setVisibility(View.GONE);
+        button.setVisibility(View.VISIBLE);
+        buttonOne.setVisibility(View.VISIBLE);
+    }
+
+
+
+    // onclick for detaljer button
+    public void GetDetails(View view){
+
     }
 
     // Dette er funktionen hvori alt information bliver delt mellem activities og de 2 fragments

@@ -21,7 +21,6 @@ public class WifiInformation {
     }
 
     public int CheckDownload() {
-        System.out.println(Download + BasisDownload + Upload + BasisUpload);
 
         // Added 185 to counter scoring init
         int Score = 385;
@@ -34,9 +33,8 @@ public class WifiInformation {
         scoring.put(50.0, Score -= 30);
         scoring.put(800.0, Score -= 15);
 
-        System.out.println("Score efter første test" + Score);
         Result = DownloadToBasis(scoring.get(scoring.floorKey((double) Download)));
-        System.out.println("Download Result er:" + Result);
+        Result = RankingDownload(Result);
 
         return Result;
     }
@@ -60,7 +58,6 @@ public class WifiInformation {
         // Added 250 to counter the subtraction in scoring init
         int Score = 350;
         int Result;
-        System.out.println("Upload er LIGE NU " + Score);
 
         final NavigableMap<Double, Integer> scoring = new TreeMap<Double, Integer>();
         scoring.put(0.0, Score -= 100);
@@ -68,11 +65,9 @@ public class WifiInformation {
         scoring.put(5.0, Score -= 40);
         scoring.put(10.0, Score -= 20);
         scoring.put(25.0, Score -= 10);
-        System.out.println("Upload er   !!!!!!!!!!!!!!!!!! " + Upload);
-        System.out.println("Upload er HER EFTER " + Score);
 
         Result = UploadToBasis(scoring.get(scoring.floorKey((double) Upload)));
-        System.out.println("Upload Result er:" + Result);
+        Result = RankingUpload(Result);
         return Result;
     }
 
@@ -94,15 +89,12 @@ public class WifiInformation {
 
         if (Score >= 75) {
             Ranking = 1;
-            System.out.println("Ranking er" + Ranking);
             return Ranking;
         } else if (Score >= 50 && Score < 75) {
             Ranking = 2;
-            System.out.println("Ranking er" + Ranking);
             return Ranking;
         }
         Ranking = 3;
-        System.out.println("Ranking er" + Ranking);
         return Ranking;
     }
 
@@ -112,19 +104,37 @@ public class WifiInformation {
 
         if (Score >= 75) {
             Ranking = 1;
-            System.out.println("Ranking er" + Ranking);
             return Ranking;
 
         } else if (Score >= 50 && Score < 75) {
 
-            System.out.println("Ranking er" + Ranking);
             return Ranking;
         }
         Ranking = 3;
-        System.out.println("Ranking er" + Ranking);
         return Ranking;
 
     }
+    // det hele handler om at koge det ned til at tal
+    public int FinalRank (int Upload, int Download){
+        int sum = Upload + Download;
+        int FinalRank;
+
+        // kun hvis begge test får fuld score får man en grøn skærm
+        if (sum == 2){
+            FinalRank = 1;
+        }
+        else if (sum == 3 || sum == 4){
+            FinalRank = 2;
+        }
+        else{
+            FinalRank = 3;
+        }
+        return FinalRank;
+
+
+
+    }
+
 }
 
 
