@@ -112,8 +112,6 @@ public class activity_wifitest extends AppCompatActivity implements DataSender{
     // Dette er funktionen hvori alt information bliver delt mellem activities og de 2 fragments
     @Override
     public void WifiData(int TestType, long Download, long Upload, String BSSID, long RSSI) {
-        System.out.println("Download er: "+Download+"Upload er: "+Upload+"BSSID er: "+BSSID+"RSSI er: "+RSSI);
-
         Fragment fragment = (fragment_result) getSupportFragmentManager().findFragmentByTag("RESULT");
         fragment_result FragRes = (fragment_result) fragment;
 
