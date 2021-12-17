@@ -33,9 +33,6 @@ public class fragment_wifitest extends Fragment implements DataSender {
     String BSSID;
     int TestType;
 
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
@@ -60,14 +57,7 @@ public class fragment_wifitest extends Fragment implements DataSender {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
-
-        }
-
-
-
-
+    }
 
     public void WifiScan(){
         WifiManager WFM = (WifiManager) getContext().getSystemService(Context.WIFI_SERVICE);
@@ -80,22 +70,12 @@ public class fragment_wifitest extends Fragment implements DataSender {
         WFM.startScan();
         List<ScanResult> result = WFM.getScanResults();
 
-        //System.out.println("Bruh 1");
-        //System.out.println(Arrays.toString(result.toArray()));
-        //System.out.println("Bruh 2");
-
         for (ScanResult network : result) {
             if (network.frequency < 2500) {
                 System.out.println(network.SSID + " " + network.BSSID + " " + network.frequency);
             }
         }
     }
-
-
-
-
-
-
 
     // det igennem denne funktion at den indsamlede data bliver sendt til
     public void SendToActivity(int Testnumber){
