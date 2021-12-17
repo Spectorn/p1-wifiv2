@@ -72,7 +72,7 @@ public class fragment_wifitest extends Fragment implements DataSender {
 
         for (ScanResult network : result) {
             if (network.frequency < 2500) {
-                System.out.println(network.SSID + " " + network.BSSID + " " + network.frequency);
+                System.out.println(network.SSID + " " + network.BSSID + " " + getChannel(network.frequency));
             }
         }
     }
@@ -118,7 +118,7 @@ public class fragment_wifitest extends Fragment implements DataSender {
 
     public int getChannel(int frequency) {
         final ArrayList<Integer> channelFreq = new ArrayList<>(Arrays.asList(0, 2412, 2417, 2422, 2427, 2432,
-                2432, 2437, 2442, 2447));
+                2437, 2442, 2447, 2452, 2457, 2462, 2467, 2472, 2482));
         return channelFreq.indexOf(Integer.valueOf(frequency));
     }
 }
