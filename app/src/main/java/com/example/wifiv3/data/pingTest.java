@@ -10,11 +10,10 @@ public class pingTest {
             @Override
             public void run() {
                 try {
-                    Runtime runtime = Runtime.getRuntime();
                     long start = System.currentTimeMillis();
-                    runtime.exec("ping -c 1 172.104.152.182");
+                    Runtime.getRuntime().exec("ping -c 1 172.104.152.182");
                     long end = System.currentTimeMillis();
-                    long dt = end-start;
+                    long dt = end - start;
                     System.out.println("The ping is: " + dt + " ms");
                 } catch (IOException e) {
                     e.printStackTrace();
