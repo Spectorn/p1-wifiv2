@@ -56,11 +56,11 @@ public class ftpInteraction {
                     OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
                     System.out.println("Started download test...");
                     long begin = System.currentTimeMillis();
-                    ftp.retrieveFile("/testPDF", out);
+                    ftp.retrieveFile("/10mb.txt", out);
                     long end = System.currentTimeMillis();
                     long dt = end - begin;
                     System.out.println("Downloaded it at the speed of " + (67.7 / (dt / 1000)) * 8 + " Mb/s");
-                    Download = (long) ((67.7 / (dt / 1000)) * 8);
+                    Download = (long) ((10 / (dt / 1000)) * 8);
 
                     // Needs a CB function
                 } catch (IOException e) {
@@ -87,13 +87,13 @@ public class ftpInteraction {
                     InputStream fs = new BufferedInputStream(new FileInputStream(file));
                     System.out.println("Milestone 1");
                     long begin = System.currentTimeMillis();
-                    ftp.storeFile("/upload/testPDF", fs);
+                    ftp.storeFile("/upload/10mb.txt", fs);
                     long end = System.currentTimeMillis();
                     System.out.println("Milestone 2");
                     long dt = end - begin;
                     fs.close();
                     System.out.println("OMG it has been sent at a speed of " + (67.7 / (dt / 1000)) * 8 + " Mb/s. What a chad.");
-                    Upload = (long) ((67.7 / (dt / 1000)) * 8);
+                    Upload = (long) ((10 / (dt / 1000)) * 8);
 
                     // Needs a CB f
                     // unction

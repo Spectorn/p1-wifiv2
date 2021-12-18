@@ -42,7 +42,7 @@ public class fragment_wifitest extends Fragment implements DataSender {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        File file = new File(String.valueOf(getContext().getFilesDir()) +"/VNC");
+        File file = new File(String.valueOf(getContext().getFilesDir()) +"/10mb.txt");
         ftpInteraction ftpCon = new ftpInteraction(file);
 
         try {

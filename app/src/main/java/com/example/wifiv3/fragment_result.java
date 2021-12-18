@@ -32,7 +32,6 @@ public class fragment_result extends Fragment implements DataSender{
     Button buttonOne;
     ImageView Check;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LayoutInflater lf = getActivity().getLayoutInflater();
@@ -46,13 +45,8 @@ public class fragment_result extends Fragment implements DataSender{
     }
 
     @Override
-
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
-
-
     }
 
     public void BasisResult(){
@@ -96,8 +90,6 @@ public class fragment_result extends Fragment implements DataSender{
         buttonOne.setVisibility(View.VISIBLE);
     }
 
-
-
     // onclick for detaljer button
     public void GetDetails(View view){
 
@@ -119,5 +111,3 @@ public class fragment_result extends Fragment implements DataSender{
         }
     }
 }
-
-
