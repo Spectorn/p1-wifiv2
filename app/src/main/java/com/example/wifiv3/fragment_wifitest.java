@@ -10,11 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.wifiv3.data.ftpInteraction;
+import com.example.wifiv3.data.pingTest;
 
 
 import androidx.fragment.app.Fragment;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,9 +46,14 @@ public class fragment_wifitest extends Fragment implements DataSender {
         super.onCreate(savedInstanceState);
         File file = new File(String.valueOf(getContext().getFilesDir()) +"/10mb.txt");
         ftpInteraction ftpCon = new ftpInteraction(file);
+        try {
+            pingTest ping = new pingTest();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         try {
-            //ftpCon.iperf();
             ftpCon.login();
             ftpCon.SpeedTest();
             ftpCon.uploadtest();
