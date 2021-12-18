@@ -48,7 +48,7 @@ public class fragment_wifitest extends Fragment implements DataSender {
         ftpInteraction ftpCon = new ftpInteraction(file);
         try {
             pingTest ping = new pingTest();
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
 
