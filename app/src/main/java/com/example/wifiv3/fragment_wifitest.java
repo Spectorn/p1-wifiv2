@@ -76,11 +76,31 @@ public class fragment_wifitest extends Fragment implements DataSender {
 
         WFM.startScan();
         List<ScanResult> result = WFM.getScanResults();
+        int[] channelCounter = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
-        for (ScanResult network : result) {
-            if (network.frequency < 2500) {
-                System.out.println(network.SSID + " " + network.BSSID + " " + getChannel(network.frequency));
+        // If 5 GHz: Change network. If 2.4 GHz check if router
+        // uses the most populated channel.
+        if (WifiInfo.getFrequency() > 5000) {
+            System.out.println("Change to another network");
+        } else {
+            // Appends the channel number to a list. 0th index is for 5 GHz channels
+            for (ScanResult network : result) {
+                channelCounter[getChannel(network.frequency) + 1] = channelCounter[getChannel(network.frequency) + 1] + 1;
             }
+        }
+
+        boolean changeChannel = false;
+
+        // Checks if the current wifi connection is on a wifi channel,
+        // which is one of the most used and sets changeChannel to true if so.
+        for (int i = 0; i < channelCounter.length; i++) {
+            if (getChannel(WifiInfo.getFrequency()) >= channelCounter[i]) {
+                changeChannel = true;
+            }
+        }
+
+        if (changeChannel) {
+            System.out.println("Maybe you should change your wifi channel");
         }
     }
 

@@ -63,6 +63,7 @@ public class ftpInteraction {
                     ftp.retrieveFile("/10mb.txt", out);
                     long end = System.currentTimeMillis();
                     long dt = end - begin;
+                    dt = 1000;
                     System.out.println("Downloaded it at the speed of " + (67.7 / (dt / 1000)) * 8 + " Mb/s");
                     Download = (long) ((10 / (dt / 1000)) * 8);
 
@@ -95,6 +96,7 @@ public class ftpInteraction {
                     long end = System.currentTimeMillis();
                     System.out.println("Milestone 2");
                     long dt = end - begin;
+                    dt = 1000;
                     fs.close();
                     System.out.println("OMG it has been sent at a speed of " + (67.7 / (dt / 1000)) * 8 + " Mb/s. What a chad.");
                     Upload = (long) ((10 / (dt / 1000)) * 8);

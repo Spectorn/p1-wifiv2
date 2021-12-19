@@ -88,9 +88,7 @@ public class fragment_result extends Fragment implements DataSender{
 
         Fragment fragment = (fragment_boxresult) getFragmentManager().findFragmentByTag("BOX");
         fragment_boxresult FragRes = (fragment_boxresult) fragment;
-        FragRes.SetScene(Ranking);
-
-
+        //FragRes.SetScene(Ranking);
     }
 
 
