@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 public class fragment_result extends Fragment implements DataSender{
 
@@ -31,6 +32,7 @@ public class fragment_result extends Fragment implements DataSender{
     Button button;
     Button buttonOne;
     ImageView Check;
+    int Ranking;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,7 +61,6 @@ public class fragment_result extends Fragment implements DataSender{
     public void FirstTest(){
         int DownloadRank;
         int UploadRank;
-        int Ranking;
         WifiInformation TestOne = new WifiInformation(R_Download, R_Upload, R_RSSI, BasisDownload, BasisUpload, BasisRSSI);
         DownloadRank = TestOne.CheckDownload();
         UploadRank = TestOne.CheckUpload();
@@ -78,20 +79,24 @@ public class fragment_result extends Fragment implements DataSender{
 
     }
 
-
-
-    public void ClearLayout(){
-        System.out.println("layout clear");
-    }
-
     public void GoodResult(){
-        Check.setVisibility(View.GONE);
-        button.setVisibility(View.VISIBLE);
-        buttonOne.setVisibility(View.VISIBLE);
+        FragmentTransaction ftThree = getFragmentManager().beginTransaction();
+        ftThree.add(R.id.FragmentContainer, new fragment_boxresult(), "BOX");
+        ftThree.replace(R.id.FragmentContainer, new fragment_boxresult(), "BOX");
+        ftThree.addToBackStack(null);
+        ftThree.commit();
+
+        Fragment fragment = (fragment_boxresult) getFragmentManager().findFragmentByTag("BOX");
+        fragment_boxresult FragRes = (fragment_boxresult) fragment;
+        FragRes.SetScene(Ranking);
+
+
     }
 
-    // onclick for detaljer button
-    public void GetDetails(View view){
+
+
+    public int getterRanking(){
+        return Ranking;
 
     }
 

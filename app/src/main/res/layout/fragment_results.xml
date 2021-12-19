@@ -14,7 +14,6 @@
         android:layout_width="54dp"
         android:layout_height="15dp"
         android:text="Succes"
-        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,35 +29,7 @@
         app:layout_constraintVertical_bias="0.305"
         app:srcCompat="@drawable/check" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/TelenorBlue"
-        android:onClick="GetDetails"
-        android:text="Se detaljer"
-        android:textColor="#212121"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.277" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="143dp"
-        android:layout_height="55dp"
-        android:background="@color/TelenorBlue"
-        android:text="Se problemer"
-        android:textColor="#212121"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

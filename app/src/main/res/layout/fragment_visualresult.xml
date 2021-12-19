@@ -15,12 +15,12 @@
         android:layout_marginStart="236dp"
         android:layout_marginEnd="2dp"
         android:layout_marginBottom="562dp"
+        android:background="@color/SucesGreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="?attr/actionBarDivider"
-        android:background="@color/SucesGreen"/>
+        app:srcCompat="?attr/actionBarDivider" />
 
     <ImageView
         android:id="@+id/boxOne"
@@ -45,8 +45,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/boxOne"
         app:layout_constraintEnd_toEndOf="@+id/boxOne"
         app:layout_constraintStart_toStartOf="@+id/boxOne"
-        app:layout_constraintTop_toTopOf="@+id/boxOne"
-        />
+        app:layout_constraintTop_toTopOf="@+id/boxOne" />
 
     <TextView
         android:id="@+id/UploadText"
@@ -62,63 +61,109 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="260dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="63dp"
-        tools:layout_editor_absoluteY="253dp" />
+        app:layout_constraintBottom_toTopOf="@+id/imageView7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.178"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="63dp"
+        android:layout_marginTop="375dp"
+        android:layout_marginEnd="290dp"
+        android:layout_marginBottom="337dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="63dp"
-        tools:layout_editor_absoluteY="375dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="301dp"
+        android:layout_marginTop="253dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="459dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="301dp"
-        tools:layout_editor_absoluteY="253dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="301dp"
+        android:layout_marginTop="375dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="337dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="301dp"
-        tools:layout_editor_absoluteY="375dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView7"
         android:layout_width="131dp"
         android:layout_height="66dp"
-        app:srcCompat="@drawable/netflix"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="309dp" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="309dp"
+        android:layout_marginEnd="264dp"
+        android:layout_marginBottom="356dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/netflix" />
 
     <ImageView
         android:id="@+id/imageView8"
         android:layout_width="87dp"
         android:layout_height="65dp"
-        app:srcCompat="@drawable/live"
-        tools:layout_editor_absoluteX="287dp"
-        tools:layout_editor_absoluteY="310dp" />
+        android:layout_marginStart="287dp"
+        android:layout_marginTop="310dp"
+        android:layout_marginEnd="37dp"
+        android:layout_marginBottom="356dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/live" />
 
     <ImageView
         android:id="@+id/imageView9"
         android:layout_width="58dp"
         android:layout_height="84dp"
-        app:srcCompat="@drawable/browsing"
-        tools:layout_editor_absoluteX="301dp"
-        tools:layout_editor_absoluteY="169dp" />
+        android:layout_marginStart="301dp"
+        android:layout_marginTop="169dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="478dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/browsing" />
 
     <ImageView
         android:id="@+id/imageView10"
         android:layout_width="58dp"
         android:layout_height="84dp"
-        app:srcCompat="@drawable/browsing"
-        tools:layout_editor_absoluteX="63dp"
-        tools:layout_editor_absoluteY="169dp" />
+        android:layout_marginTop="169dp"
+        android:layout_marginBottom="478dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView9"
+        app:layout_constraintHorizontal_bias="0.259"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/browsing" />
 </androidx.constraintlayout.widget.ConstraintLayout>
