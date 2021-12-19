@@ -16,6 +16,7 @@ public class ftpInteraction {
     File file;
     long Download;
     long Upload;
+    boolean success = true;
     public ftpInteraction(File files) {
         file = files;
     }
@@ -29,7 +30,10 @@ public class ftpInteraction {
                     System.out.println("Loggin in");
                     ftp.connect("172.104.152.182", 21);
 
-                    ftp.login("p1", "comtek21p1b303b");
+                    while (!success) {
+                        success = ftp.login("p1", "comtek21p1b303b");
+                    }
+
                     ftp.enterLocalPassiveMode();
                     ftp.setBufferSize(1024*1024);
                     System.out.println("Buffer size it: " + ftp.getBufferSize());
