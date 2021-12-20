@@ -81,14 +81,22 @@ public class fragment_result extends Fragment implements DataSender{
 
     public void GoodResult(){
         FragmentTransaction ftThree = getFragmentManager().beginTransaction();
-        ftThree.add(R.id.FragmentContainer, new fragment_boxresult(), "BOX");
         ftThree.replace(R.id.FragmentContainer, new fragment_boxresult(), "BOX");
         ftThree.addToBackStack(null);
         ftThree.commit();
 
-        Fragment fragment = (fragment_boxresult) getFragmentManager().findFragmentByTag("BOX");
-        fragment_boxresult FragRes = (fragment_boxresult) fragment;
-        FragRes.SetScene(Ranking);
+        /*
+
+        Fragment fragment1 = (fragment_boxresult) getFragmentManager().findFragmentByTag("BOX");
+        fragment_boxresult FragBox = (fragment_boxresult) fragment1;
+        FragBox.SetScene(Ranking);
+
+         */
+
+
+
+
+
 
 
     }
@@ -96,8 +104,15 @@ public class fragment_result extends Fragment implements DataSender{
 
 
     public int getterRanking(){
+        System.out.println(Ranking +"Det her er rank jeg sender");
+        Ranking = 1;
         return Ranking;
 
+    }
+    public void Destroy(){
+        System.out.println("Destroyer fragment");
+
+        getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
     }
 
     // Dette er funktionen hvori alt information bliver delt mellem activities og de 2 fragments
@@ -115,4 +130,6 @@ public class fragment_result extends Fragment implements DataSender{
                 break;
         }
     }
+
+
 }
