@@ -16,7 +16,6 @@ public class ftpInteraction {
     File file;
     long Download;
     long Upload;
-    boolean success = true;
     public ftpInteraction(File files) {
         file = files;
     }
@@ -29,13 +28,8 @@ public class ftpInteraction {
                 try {
                     System.out.println("Loggin in");
                     ftp.connect("172.104.152.182", 21);
-
-                    while (!success) {
-                        success = ftp.login("p1", "comtek21p1b303b");
-                    }
-
+                    ftp.login("p1", "comtek21p1b303b");
                     ftp.enterLocalPassiveMode();
-                    ftp.setBufferSize(1024*1024);
                     System.out.println("Buffer size it: " + ftp.getBufferSize());
                 } catch (IOException e) {
                     System.out.println("Login failed...");
@@ -60,10 +54,9 @@ public class ftpInteraction {
                     OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
                     System.out.println("Started download test...");
                     long begin = System.currentTimeMillis();
-                    ftp.retrieveFile("/10mb.txt", out);
+                    boolean successs = ftp.retrieveFile("/10mb.txt", out);
                     long end = System.currentTimeMillis();
                     long dt = end - begin;
-                    dt = 1000;
                     System.out.println("Downloaded it at the speed of " + (67.7 / (dt / 1000)) * 8 + " Mb/s");
                     dt = 1000;
                     Download = (long) ((10 / (dt / 1000)) * 8);
@@ -96,7 +89,6 @@ public class ftpInteraction {
                     long end = System.currentTimeMillis();
                     System.out.println("Milestone 2");
                     long dt = end - begin;
-                    dt = 1000;
                     fs.close();
                     System.out.println("OMG it has been sent at a speed of " + (67.7 / (dt / 1000)) * 8 + " Mb/s. What a chad.");
                     dt = 1000;
@@ -114,7 +106,6 @@ public class ftpInteraction {
         });
         uploadthread.start();
 
-
         try {
             uploadthread.join();
 
@@ -131,5 +122,3 @@ public class ftpInteraction {
             return Upload;
         }
     }
-
-

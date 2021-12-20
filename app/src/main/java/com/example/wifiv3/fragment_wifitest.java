@@ -59,11 +59,14 @@ public class fragment_wifitest extends Fragment implements DataSender {
         try {
             ftpCon.login();
             ftpCon.SpeedTest();
+            System.out.println("Download test has been done");
             ftpCon.uploadtest();
+            System.out.println("Upload test has been done");
+
+            // CB functions
             Download = ftpCon.getDownload();
             Upload = ftpCon.getUpload();
             wifiScan.WifiScan();
-            //WifiScan();
             SendToActivity(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -100,7 +103,9 @@ public class fragment_wifitest extends Fragment implements DataSender {
         try {
             ftpCon.login();
             ftpCon.SpeedTest();
+            System.out.println("Download test has started... 2");
             ftpCon.uploadtest();
+            System.out.println("Upload test has started... 2");
             Download = ftpCon.getDownload();
             Upload = ftpCon.getUpload();
             wifiScan.WifiScan();
