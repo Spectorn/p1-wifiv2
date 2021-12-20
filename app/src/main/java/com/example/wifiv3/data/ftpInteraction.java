@@ -88,7 +88,6 @@ public class ftpInteraction {
             public void run() {
                 System.out.println("Upload thread has started!!");
                 try {
-
                     InputStream fs = new BufferedInputStream(new FileInputStream(file));
                     System.out.println("Milestone 1");
                     long begin = System.currentTimeMillis();
