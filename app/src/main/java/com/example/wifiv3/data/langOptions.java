@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -32,6 +33,7 @@ public class langOptions extends View{
         FileWriter myWriter = new FileWriter(getContext().getFilesDir() + "/config.cfg");
         myWriter.write(lang);
         myWriter.close();
+        getLang();
     }
 
     // Reads the language
@@ -43,24 +45,33 @@ public class langOptions extends View{
         while (myReader.hasNextLine()) {
             lang = myReader.nextLine();
         }
+        System.out.println("The file contains: " + lang);
 
         return lang;
     }
 
-    public void changeLanguage(View view) throws IOException{
-        TextView welcomeText = view.getRootView().findViewById(R.id.textView2);
-        //TextView scanText = getRootView().findViewById(R.id.textView);
-
+    public void changeLanguage(View view, String lang, int activityNum) throws IOException{
         // Ensuring the text phrases gets pulled from the right strings.xml
-        Locale local = new Locale(view.getTag().toString());
+        Locale local = new Locale(lang);
         Configuration config = new Configuration();
         config.locale = local;
-        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
 
-        // Changing text according to the language parameter
-        welcomeText.setText(getContext().getString(R.string.greeting));
-        //scanText.setText(getContext().getString(R.string.scanGreeting));
+        // Updating the strings.xml file to get pulled from
+        getResources().updateConfiguration(config, getContext().getResources().getDisplayMetrics());
 
-        setLang(view.getTag().toString());
+        // Updates text depending on which activity is calling.
+        // 1: MainActivity
+        // 2: activity_wifitest
+        if (activityNum == 1) {
+            TextView welcomeText = view.getRootView().findViewById(R.id.textView2);
+            welcomeText.setText(getContext().getString(R.string.greeting));
+        } else if (activityNum == 2) {
+            TextView scanText = view.getRootView().findViewById(R.id.textView);
+            Button startScan = view.getRootView().findViewById(R.id.ScanButton);
+            scanText.setText(getContext().getString(R.string.scanGreeting));
+            startScan.setText(getResources().getString(R.string.scanButton));
+        }
+
+        setLang(lang);
     }
 }

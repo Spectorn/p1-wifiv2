@@ -12,7 +12,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import com.example.wifiv3.data.langOptions;
 
+import java.io.IOException;
 import java.util.Objects;
 
 import javax.xml.transform.Result;
@@ -25,6 +27,7 @@ public class activity_wifitest extends AppCompatActivity implements DataSender{
     ImageView PictureThree;
     TextView Explainer;
     int ActivityTestType;
+    langOptions language;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,15 @@ public class activity_wifitest extends AppCompatActivity implements DataSender{
         PictureTwo = (ImageView) findViewById(R.id.imageView3);
         PictureThree = (ImageView) findViewById(R.id.imageView4);
         Explainer = (TextView) findViewById(R.id.textView);
+
+        language = new langOptions(getApplicationContext());
+
+        try {
+            language.changeLanguage(findViewById(R.id.textView), language.getLang(), 2);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
 
         ActivityTestType = 1;
     }

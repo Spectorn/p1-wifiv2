@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/TelenorBlue"
         android:onClick="ScanStart"
-        android:text="Begynd"
+        android:text="@string/scanButton"
         app:layout_constraintBottom_toTopOf="@+id/FragmentContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

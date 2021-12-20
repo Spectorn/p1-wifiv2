@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         language = new langOptions(getApplicationContext());
 
         try {
-            language.getLang();
+            language.changeLanguage(findViewById(R.id.danishBtn), language.getLang(), 1);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -71,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
     // Click listener calls this method to update the textviews
     // and supplies a view, which is required to change these values
     public void changeLanguage(View v) throws IOException{
-        language.changeLanguage(v);
+        TextView text = findViewById(R.id.textView);
+        language.changeLanguage(v, v.getTag().toString(), 1);
         language.setLang(v.getTag().toString());
     }
 }
