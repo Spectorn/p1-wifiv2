@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.wifiv3.data.ftpInteraction;
 import com.example.wifiv3.data.pingTest;
+import com.example.wifiv3.data.wifiScanning;
 
 
 import androidx.fragment.app.Fragment;
@@ -46,6 +47,8 @@ public class fragment_wifitest extends Fragment implements DataSender {
         super.onCreate(savedInstanceState);
         File file = new File(String.valueOf(getContext().getFilesDir()) +"/10mb.txt");
         ftpInteraction ftpCon = new ftpInteraction(file);
+        wifiScanning wifiScan = new wifiScanning(getContext().getApplicationContext());
+
         try {
             pingTest ping = new pingTest();
         } catch (IOException | InterruptedException e) {
@@ -59,28 +62,11 @@ public class fragment_wifitest extends Fragment implements DataSender {
             ftpCon.uploadtest();
             Download = ftpCon.getDownload();
             Upload = ftpCon.getUpload();
-            WifiScan();
+            wifiScan.WifiScan();
+            //WifiScan();
             SendToActivity(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-    }
-
-    public void WifiScan(){
-        WifiManager WFM = (WifiManager) getContext().getSystemService(Context.WIFI_SERVICE);
-        WifiInfo WifiInfo = WFM.getConnectionInfo();
-
-        BSSID = WifiInfo.getBSSID();
-        String SSID = WifiInfo.getSSID();
-        RSSI = WifiInfo.getRssi();
-
-        WFM.startScan();
-        List<ScanResult> result = WFM.getScanResults();
-
-        for (ScanResult network : result) {
-            if (network.frequency < 2500) {
-                System.out.println(network.SSID + " " + network.BSSID + " " + getChannel(network.frequency));
-            }
         }
     }
 
@@ -107,6 +93,7 @@ public class fragment_wifitest extends Fragment implements DataSender {
     public void CallTest(int TestNumber){
         File file = new File(String.valueOf(getContext().getFilesDir()) +"/testPDF");
         ftpInteraction ftpCon = new ftpInteraction(file);
+        wifiScanning wifiScan = new wifiScanning(getContext().getApplicationContext());
 
         TestType = TestNumber;
 
@@ -116,16 +103,10 @@ public class fragment_wifitest extends Fragment implements DataSender {
             ftpCon.uploadtest();
             Download = ftpCon.getDownload();
             Upload = ftpCon.getUpload();
-            WifiScan();
+            wifiScan.WifiScan();
             SendToActivity(TestNumber);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    public int getChannel(int frequency) {
-        final ArrayList<Integer> channelFreq = new ArrayList<>(Arrays.asList(0, 2412, 2417, 2422, 2427, 2432,
-                2437, 2442, 2447, 2452, 2457, 2462, 2467, 2472, 2482));
-        return channelFreq.indexOf(Integer.valueOf(frequency));
     }
 }

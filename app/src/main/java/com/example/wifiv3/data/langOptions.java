@@ -29,27 +29,23 @@ public class langOptions extends View{
     }
 
     public void setLang(String lang) throws  IOException{
-        FileWriter myWriter = new FileWriter(getContext().getFilesDir() + "/bruh.txt");
+        FileWriter myWriter = new FileWriter(getContext().getFilesDir() + "/config.cfg");
         myWriter.write(lang);
         myWriter.close();
-        System.out.println("wew læds!!!!!!!!!!!!");
     }
 
+    // Reads the language
     public String getLang() throws IOException{
-        File bruh = new File(getContext().getFilesDir() + "/bruh.txt");
+        File bruh = new File(getContext().getFilesDir() + "/config.cfg");
         Scanner myReader = new Scanner(bruh);
+        String lang = null;
 
         while (myReader.hasNextLine()) {
-            System.out.println(myReader.nextLine());
+            lang = myReader.nextLine();
         }
-        System.out.println("OMG THE CONTENT OF THE FILE HAS BEEN WRITTEN AND READ TO!!!!!!!!!");
-        return "wew";
+
+        return lang;
     }
-
-    public void updateText() {
-
-    }
-
 
     public void changeLanguage(View view) throws IOException{
         TextView welcomeText = view.getRootView().findViewById(R.id.textView2);
