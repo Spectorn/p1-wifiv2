@@ -45,8 +45,7 @@ public class fragment_wifitest extends Fragment implements DataSender {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        File file = new File(String.valueOf(getContext().getFilesDir()) +"/10mb.txt");
-        ftpInteraction ftpCon = new ftpInteraction(file);
+        ftpInteraction ftpCon = new ftpInteraction(getContext().getApplicationContext());
         wifiScanning wifiScan = new wifiScanning(getContext().getApplicationContext());
 
         try {
@@ -58,9 +57,9 @@ public class fragment_wifitest extends Fragment implements DataSender {
 
         try {
             ftpCon.login();
-            ftpCon.SpeedTest();
+            ftpCon.downloadTest();
             System.out.println("Download test has been done");
-            ftpCon.uploadtest();
+            ftpCon.uploadTest();
             System.out.println("Upload test has been done");
 
             // CB functions
@@ -95,19 +94,20 @@ public class fragment_wifitest extends Fragment implements DataSender {
     // Det funktionen activity kalder når denne fragment skal lave testen
     public void CallTest(int TestNumber){
         File file = new File(String.valueOf(getContext().getFilesDir()) +"/testPDF");
-        ftpInteraction ftpCon = new ftpInteraction(file);
+        ftpInteraction ftpCon = new ftpInteraction(getContext().getApplicationContext());
         wifiScanning wifiScan = new wifiScanning(getContext().getApplicationContext());
 
         TestType = TestNumber;
 
         try {
             ftpCon.login();
-            ftpCon.SpeedTest();
-            System.out.println("Download test has started... 2");
-            ftpCon.uploadtest();
-            System.out.println("Upload test has started... 2");
+            ftpCon.downloadTest();
+            ftpCon.uploadTest();
+
+            // Calls callback functions to get data from the data layer
             Download = ftpCon.getDownload();
             Upload = ftpCon.getUpload();
+
             wifiScan.WifiScan();
             SendToActivity(TestNumber);
         } catch (InterruptedException e) {

@@ -8,7 +8,5 @@
     <string name="PopUp2">Slå Wifi til</string>
     <string name="Popup3">Annuller</string>
     <string name="scanButton">Begynd</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
 

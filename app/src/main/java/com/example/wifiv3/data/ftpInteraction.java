@@ -1,5 +1,8 @@
 package com.example.wifiv3.data;
 
+import android.content.Context;
+import android.view.View;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -11,28 +14,31 @@ import java.io.OutputStream;
 
 import org.apache.commons.net.ftp.FTPClient;
 
-public class ftpInteraction {
+public class ftpInteraction extends View {
     FTPClient ftp = new FTPClient();
-    File file;
     long Download;
     long Upload;
-    public ftpInteraction(File files) {
-        file = files;
-    }
+    File file;
 
+    // UI layer injects an application context into the constructor
+    public ftpInteraction(Context ctx) {
+        super(ctx);
+        file = new File(getContext().getFilesDir() + "/10mb.txt");
+    }
 
     public void login() {
         Thread loginThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    System.out.println("Loggin in");
+                    // Throws IOException. Replace "<HOSTNAME>" with IP-address
                     ftp.connect("172.104.152.182", 21);
+                    // Throws IOException. Replace "<USERNAME>" and "<PASSWORD>" with a valid account
                     ftp.login("p1", "comtek21p1b303b");
+                    // Opens data port for FTP file transfers
                     ftp.enterLocalPassiveMode();
-                    System.out.println("Buffer size it: " + ftp.getBufferSize());
                 } catch (IOException e) {
-                    System.out.println("Login failed...");
+                    System.out.println(e);
                 }
             }
         });
@@ -40,84 +46,90 @@ public class ftpInteraction {
         try {
             loginThread.join();
         } catch (InterruptedException e) {
-            System.out.println("Download thread borked");
+            System.out.println(e);
         }
     }
 
 
-    public void SpeedTest() throws InterruptedException {
-        Thread thread = new Thread(new Runnable() {
+    public void downloadTest() throws InterruptedException {
+        Thread downloadThread = new Thread(new Runnable() {
             @Override
             public void run() {
+
                 try {
-                    //File file = new File(String.valueOf(getContext().getFilesDir()) + "/airtame");
                     OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
-                    System.out.println("Started download test...");
+
+                    // Starts speedtest
                     long begin = System.currentTimeMillis();
-                    boolean successs = ftp.retrieveFile("/10mb.txt", out);
+                    // Throws IOException
+                    ftp.retrieveFile("/10mb.txt", out);
                     long end = System.currentTimeMillis();
+                    // Throws IOException
+                    out.close();
+
+                    // Calculates time it takes to complete
                     long dt = end - begin;
-                    System.out.println("Downloaded it at the speed of " + (67.7 / (dt / 1000)) * 8 + " Mb/s");
-                    dt = 1000;
-                    Download = (long) ((10 / (dt / 1000)) * 8);
 
-                    // Needs a CB function
+                    // Converts download speed to Mb/s
+                    Download = (long) ((10.48 / (dt / 1000)) * 8);
                 } catch (IOException e) {
-                    System.out.println("Der er et problem");
-                }
-            }
-        });
-
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            System.out.println("Download thread borked");
-        }
-    }
-
-    public void uploadtest() throws InterruptedException {
-        Thread uploadthread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("Upload thread has started!!");
-                try {
-                    InputStream fs = new BufferedInputStream(new FileInputStream(file));
-                    System.out.println("Milestone 1");
-                    long begin = System.currentTimeMillis();
-                    ftp.storeFile("/upload/10mb.txt", fs);
-                    long end = System.currentTimeMillis();
-                    System.out.println("Milestone 2");
-                    long dt = end - begin;
-                    fs.close();
-                    System.out.println("OMG it has been sent at a speed of " + (67.7 / (dt / 1000)) * 8 + " Mb/s. What a chad.");
-                    dt = 1000;
-                    Upload = (long) ((10 / (dt / 1000)) * 8);
-
-                    // Needs a CB f
-                    // unction
-                    ftp.disconnect();
-                } catch (IOException e) {
-                    System.out.println("Error");
                     System.out.println(e);
                 }
             }
-
         });
-        uploadthread.start();
-
+        downloadThread.start();
         try {
-            uploadthread.join();
-
+            // Throws InterruptedException
+            downloadThread.join();
         } catch (InterruptedException e) {
-            System.out.println("upload thread borked");
+            System.out.println(e);
         }
     }
 
+    public void uploadTest() {
+        Thread uploadThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    // Throws FileNotFoundException (Goes under IOException)
+                    InputStream fs = new BufferedInputStream(new FileInputStream(file));
+
+                    // Starts upload test
+                    long begin = System.currentTimeMillis();
+                    // Throws IOException
+                    ftp.storeFile("/upload/10mb.txt", fs);
+                    long end = System.currentTimeMillis();
+                    // Throws IOException
+                    fs.close();
+
+                    // Calculates time it takes to complete
+                    long dt = end - begin;
+
+                    // Converts to upload speed to Mb/s
+                    Upload = (long) ((10.48 / (dt / 1000)) * 8);
+
+                    // Closes FTP connection
+                    ftp.disconnect();
+                } catch (IOException e) {
+                    System.out.println(e);
+                }
+            }
+        });
+        uploadThread.start();
+
+        try {
+            // Throws InterruptedException
+            uploadThread.join();
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
+    }
+        // Callback function
         public long getDownload() {
             return Download;
         }
 
+        // Callback function
         public long getUpload() {
             return Upload;
         }

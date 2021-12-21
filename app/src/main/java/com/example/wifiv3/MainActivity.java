@@ -68,10 +68,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Click listener calls this method to update the textviews
-    // and supplies a view, which is required to change these values
+    // Language buttons calls this method on click event
     public void changeLanguage(View v) throws IOException{
-        TextView text = findViewById(R.id.textView);
         language.changeLanguage(v, v.getTag().toString(), 1);
         language.setLang(v.getTag().toString());
     }
