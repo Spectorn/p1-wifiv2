@@ -72,6 +72,7 @@ public class ftpInteraction extends View {
 
                     // Converts download speed to Mb/s
                     Download = (long) ((10.48 / (dt / 1000)) * 8);
+                    System.out.println("The download speed is: " + Download + " Mb/s");
                 } catch (IOException e) {
                     System.out.println(e);
                 }
@@ -107,6 +108,7 @@ public class ftpInteraction extends View {
 
                     // Converts to upload speed to Mb/s
                     Upload = (long) ((10.48 / (dt / 1000)) * 8);
+                    System.out.println("The upload speed is: " + Upload + " Mb/s");
 
                     // Closes FTP connection
                     ftp.disconnect();
