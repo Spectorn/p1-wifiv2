@@ -71,15 +71,18 @@ public class fragment_boxresult extends Fragment implements View.OnClickListener
         switch (Ranking) {
             case 1:
                 System.out.println("boxresult case 1");
+                // giver Null object fejl
                 //background.setBackgroundColor(android.R.color.holo_green_light);
                 break;
             case 2:
                 System.out.println("kører case 2");
                 //background.setBackgroundColor(android.R.color.holo_orange_light);
+                //Text.setText("Dit Wi-fi virker nogenlunde i dette punkt");
                 break;
             case 3:
                 System.out.println("kører case 3");
-                //background.setBackgroundColor(android.R.color.holo_orange_light);
+                //background.setBackgroundColor(android.R.color.holo_red_dark);
+                //Text.setText("Dit Wi-Fi virker dårligt i dette punkt");
                 break;
 
 

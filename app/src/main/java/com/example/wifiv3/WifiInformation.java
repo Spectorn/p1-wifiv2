@@ -43,7 +43,10 @@ public class WifiInformation {
         long Diff = BasisDownload - Download;
         // hvis der er et fald på mere end 50% så er det et problem
 
-        if (Diff > BasisDownload / 2) {
+        if (Download > BasisDownload) {
+            return Score;
+        }
+          else if (Diff > BasisDownload / 2) {
             Score -= 50;
         } else if (Diff > BasisDownload / 3) {
             Score -= 30;
@@ -72,9 +75,12 @@ public class WifiInformation {
     }
 
     public int UploadToBasis(int Score) {
-        long Diff = BasisUpload - Download;
+        long Diff = BasisUpload - Upload;
         // hvis der er et fald på mere end 50% så er det et problem
-        if (Diff > BasisUpload / 2) {
+        if (Upload > BasisUpload){
+            return Score;
+        }
+          else if (Diff > BasisUpload / 2) {
             Score -= 50;
         } else if (Diff > BasisUpload / 3) {
             Score -= 30;
@@ -107,7 +113,7 @@ public class WifiInformation {
             return Ranking;
 
         } else if (Score >= 50 && Score < 75) {
-
+            Ranking = 2;
             return Ranking;
         }
         Ranking = 3;
