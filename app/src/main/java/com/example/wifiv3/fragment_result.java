@@ -24,6 +24,15 @@ public class fragment_result extends Fragment implements DataSender{
     long BasisRSSI;
 
     int TestTypeResult;
+
+    public long getR_Download() {
+        return R_Download;
+    }
+
+    public long getR_Upload() {
+        return R_Upload;
+    }
+
     long R_Download;
     long R_Upload;
     String R_BSSID;

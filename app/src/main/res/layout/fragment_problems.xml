@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/Latency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Latency"
+        app:layout_constraintBottom_toTopOf="@+id/boxThree"
+        app:layout_constraintEnd_toEndOf="@+id/boxThree"
+        app:layout_constraintStart_toStartOf="@+id/boxThree"
+        app:layout_constraintTop_toBottomOf="@+id/boxOne" />
+
+    <ImageView
+        android:id="@+id/boxOne"
+        android:layout_width="173dp"
+        android:layout_height="169dp"
+        android:layout_marginTop="44dp"
+        android:background="@color/TelenorBlue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?attr/actionBarDivider" />
+
+    <ImageView
+        android:id="@+id/boxTwo"
+        android:layout_width="173dp"
+        android:layout_height="169dp"
+        android:background="@color/TelenorBlue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/boxThree"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/boxThree"
+        app:layout_constraintTop_toBottomOf="@+id/boxThree"
+        app:layout_constraintVertical_bias="0.419"
+        app:srcCompat="?attr/actionBarDivider" />
+
+    <ImageView
+
+        android:id="@+id/boxThree"
+        android:layout_width="173dp"
+        android:layout_height="169dp"
+        android:layout_marginTop="56dp"
+        android:background="@color/TelenorBlue"
+        app:layout_constraintEnd_toEndOf="@+id/boxOne"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/boxOne"
+        app:layout_constraintTop_toBottomOf="@+id/boxOne"
+        app:srcCompat="?attr/actionBarDivider" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="83dp"
+        android:layout_height="88dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/boxOne"
+        app:layout_constraintStart_toStartOf="@+id/boxOne"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.082"
+        app:srcCompat="@drawable/antenna" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="81dp"
+        android:layout_height="81dp"
+        android:layout_marginBottom="380dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageView10"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imageView10"
+        app:srcCompat="@drawable/latency" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="59dp"
+        android:layout_height="68dp"
+        android:layout_marginBottom="164dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageView11"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="@+id/imageView11"
+        app:srcCompat="@drawable/wind" />
+
+    <TextView
+        android:id="@+id/RSSI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RSSI"
+        app:layout_constraintBottom_toTopOf="@+id/boxOne"
+        app:layout_constraintEnd_toEndOf="@+id/boxOne"
+        app:layout_constraintStart_toStartOf="@+id/boxOne"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Channels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wi-Fi channels"
+        app:layout_constraintBottom_toTopOf="@+id/boxTwo"
+        app:layout_constraintEnd_toEndOf="@+id/boxTwo"
+        app:layout_constraintStart_toStartOf="@+id/boxTwo"
+        app:layout_constraintTop_toBottomOf="@+id/boxThree" />
+
+    <EditText
+        android:id="@+id/RssiMulti"
+        android:layout_width="145dp"
+        android:layout_height="46dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:maxLines="2"
+        app:layout_constraintBottom_toBottomOf="@+id/boxOne"
+        app:layout_constraintEnd_toEndOf="@+id/boxOne"
+        app:layout_constraintStart_toStartOf="@+id/boxOne"
+        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+
+    <EditText
+        android:id="@+id/LatencyMulti"
+        android:layout_width="172dp"
+        android:layout_height="55dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:maxLines="2"
+        app:layout_constraintBottom_toBottomOf="@+id/boxThree"
+        app:layout_constraintEnd_toEndOf="@+id/boxThree"
+        app:layout_constraintStart_toStartOf="@+id/boxThree"
+        app:layout_constraintTop_toBottomOf="@+id/imageView11" />
+
+    <EditText
+        android:id="@+id/ChannelMulti"
+        android:layout_width="160dp"
+        android:layout_height="57dp"
+        android:layout_marginBottom="92dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:maxLines="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/boxTwo"
+        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintStart_toStartOf="@+id/boxTwo"
+        app:layout_constraintTop_toBottomOf="@+id/imageView12"
+        app:layout_constraintVertical_bias="0.533" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
