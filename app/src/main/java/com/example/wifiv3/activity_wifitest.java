@@ -54,7 +54,6 @@ public class activity_wifitest extends AppCompatActivity implements DataSender{
         ActivityTestType = 1;
     }
 
-
     /// Dette er OnClick for Button
     public void ScanStart(View view) {
 

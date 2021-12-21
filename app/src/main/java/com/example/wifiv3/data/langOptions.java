@@ -38,14 +38,15 @@ public class langOptions extends View{
 
     // Reads the language
     public String getLang() throws IOException{
-        File bruh = new File(getContext().getFilesDir() + "/config.cfg");
-        Scanner myReader = new Scanner(bruh);
+        File file= new File(getContext().getFilesDir() + "/config.cfg");
+
+        // Reads the lines in the text file
+        Scanner myReader = new Scanner(file);
         String lang = null;
 
         while (myReader.hasNextLine()) {
             lang = myReader.nextLine();
         }
-        System.out.println("The file contains: " + lang);
 
         return lang;
     }
@@ -64,7 +65,7 @@ public class langOptions extends View{
         // 2: activity_wifitest
         if (activityNum == 1) {
             TextView welcomeText = view.getRootView().findViewById(R.id.textView2);
-            welcomeText.setText(getContext().getString(R.string.greeting));
+            welcomeText.setText(getResources().getString(R.string.greeting));
         } else if (activityNum == 2) {
             TextView scanText = view.getRootView().findViewById(R.id.textView);
             Button startScan = view.getRootView().findViewById(R.id.ScanButton);
