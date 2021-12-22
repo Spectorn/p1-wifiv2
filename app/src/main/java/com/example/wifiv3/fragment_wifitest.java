@@ -48,11 +48,6 @@ public class fragment_wifitest extends Fragment implements DataSender {
         ftpInteraction ftpCon = new ftpInteraction(getContext().getApplicationContext());
         wifiScanning wifiScan = new wifiScanning(getContext().getApplicationContext());
 
-        try {
-            pingTest ping = new pingTest();
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
 
 
         try {
@@ -65,6 +60,7 @@ public class fragment_wifitest extends Fragment implements DataSender {
             // CB functions
             Download = ftpCon.getDownload();
             Upload = ftpCon.getUpload();
+           RSSI = wifiScan.getRssi();
             wifiScan.WifiScan();
             SendToActivity(1);
         } catch (InterruptedException e) {

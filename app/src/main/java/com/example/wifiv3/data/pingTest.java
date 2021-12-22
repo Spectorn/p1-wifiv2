@@ -6,8 +6,9 @@ import java.io.IOException;
 
 public class pingTest {
     long ping;
-    public pingTest() throws IOException, InterruptedException {
+    public long pingTest() throws IOException, InterruptedException {
         Thread thread = new Thread(new Runnable() {
+
             @Override
             public void run() {
                 try {
@@ -20,10 +21,12 @@ public class pingTest {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
             }
         });
         thread.start();
         thread.join();
+        return ping;
     }
 
     public long getPing(long time) {

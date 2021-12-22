@@ -15,7 +15,7 @@ public class wifiScanning extends View {
         super(ctx);
     }
 
-    public void WifiScan(){
+    public boolean WifiScan(){
         WifiManager WFM = (WifiManager) getContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo WifiInfo = WFM.getConnectionInfo();
 
@@ -39,8 +39,10 @@ public class wifiScanning extends View {
         for (int i = 0; i < channelCounter.length; i++) {
             if (getChannel(WifiInfo.getFrequency()) - 1 > channelCounter[i] && channelCounter[i] != 0) {
                 System.out.println("Maybe you should change your wifi channel");
+                return true;
             }
         }
+        return false;
     }
 
     public int getChannel(int frequency) {
@@ -48,4 +50,14 @@ public class wifiScanning extends View {
                 2437, 2442, 2447, 2452, 2457, 2462, 2467, 2472, 2482));
         return channelFreq.indexOf(Integer.valueOf(frequency));
     }
+
+    public long getRssi (){
+        WifiManager WFM = (WifiManager) getContext().getSystemService(Context.WIFI_SERVICE);
+        WifiInfo WifiInfo = WFM.getConnectionInfo();
+
+        long RSSI;
+       RSSI = WifiInfo.getRssi();
+       return RSSI;
+    }
+
 }
