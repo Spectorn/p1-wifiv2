@@ -102,19 +102,13 @@ public class fragment_result extends Fragment implements DataSender{
 
          */
 
-
-
-
-
-
-
     }
 
 
 
     public int getterRanking(){
-        System.out.println(Ranking +"Det her er rank jeg sender");
         Ranking = 1;
+        System.out.println(Ranking +"Det her er rank jeg sender");
         return Ranking;
 
     }

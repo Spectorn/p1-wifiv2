@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.wifiv3.data.pingTest;
@@ -14,29 +15,25 @@ import com.example.wifiv3.data.wifiScanning;
 
 import java.io.IOException;
 
-public class fragment_problems extends Fragment {
+public class Activity_problems extends AppCompatActivity {
 
     EditText ChannelMultiline;
     EditText RssiMultiline;
     EditText LatencyMultiline;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        LayoutInflater lf = getActivity().getLayoutInflater();
-        View view = lf.inflate(R.layout.fragment_problems, container, false);
-        ChannelMultiline = (EditText) view.findViewById(R.id.ChannelMulti);
-        RssiMultiline = (EditText) view.findViewById(R.id.RssiMulti);
-        LatencyMultiline = (EditText) view.findViewById(R.id.LatencyMulti);
-
-
-        return view;
-
-    }
 
     @Override
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_problems);
+        ChannelMultiline = (EditText) findViewById(R.id.ChannelMulti);
+        RssiMultiline = (EditText) findViewById(R.id.RssiMulti);
+        LatencyMultiline = (EditText) findViewById(R.id.LatencyMulti);
+    }
+
+
+    public void InformationGather(){
         RSSI();
         Channel();
         try {
@@ -53,7 +50,7 @@ public class fragment_problems extends Fragment {
     }
 
     public void RSSI(){
-        wifiScanning wifiScan = new wifiScanning(getContext().getApplicationContext());
+        wifiScanning wifiScan = new wifiScanning(getApplicationContext());
         int RSSI = (int) wifiScan.getRssi();
 
         if(isBetween(RSSI, -40, -1)){
@@ -97,7 +94,7 @@ public class fragment_problems extends Fragment {
 
     }
     public void Channel(){
-        wifiScanning wifiScan = new wifiScanning(getContext().getApplicationContext());
+        wifiScanning wifiScan = new wifiScanning(getApplicationContext());
         boolean ChangeChannel = wifiScan.WifiScan();
         if (ChangeChannel = true){
             ChannelMultiline.setText("Der er mange enheder på samme Wi-fi kanal. overvej at skifte kanal");

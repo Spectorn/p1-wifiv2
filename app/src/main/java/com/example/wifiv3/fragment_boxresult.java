@@ -2,6 +2,7 @@
 package com.example.wifiv3;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -94,21 +94,15 @@ public class fragment_boxresult extends Fragment implements View.OnClickListener
         switch (view.getId()) {
             case R.id.button:
 
+                Intent intent = new Intent(getActivity(), Activity_visualresult.class);
+                startActivity(intent);
 
-                Fragment fragment = (fragment_result) getFragmentManager().findFragmentByTag("RESULT");
-                fragment_result FragRes = (fragment_result) fragment;
-
-                FragRes.Destroy();
-
-                FragmentTransaction ftFour = getFragmentManager().beginTransaction();
-                ftFour.replace(R.id.FragmentContainer, new fragment_visualresult(), "Visual");
-                ftFour.addToBackStack(null);
-                ftFour.commit();
 
                 break;
             case R.id.button2:
+                Intent intent2 = new Intent(getActivity(), Activity_problems.class);
+                startActivity(intent2);
 
-                //action
                 break;
         }
 

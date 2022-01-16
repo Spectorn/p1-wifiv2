@@ -19,11 +19,12 @@
         android:id="@+id/boxOne"
         android:layout_width="173dp"
         android:layout_height="169dp"
-        android:layout_marginTop="44dp"
         android:background="@color/TelenorBlue"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.094"
         app:srcCompat="?attr/actionBarDivider" />
 
     <ImageView
@@ -33,10 +34,10 @@
         android:background="@color/TelenorBlue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/boxThree"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/boxThree"
         app:layout_constraintTop_toBottomOf="@+id/boxThree"
-        app:layout_constraintVertical_bias="0.419"
+        app:layout_constraintVertical_bias="0.614"
         app:srcCompat="?attr/actionBarDivider" />
 
     <ImageView
@@ -44,23 +45,26 @@
         android:id="@+id/boxThree"
         android:layout_width="173dp"
         android:layout_height="169dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="36dp"
         android:background="@color/TelenorBlue"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/boxOne"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/boxOne"
         app:layout_constraintTop_toBottomOf="@+id/boxOne"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="?attr/actionBarDivider" />
 
     <ImageView
         android:id="@+id/imageView10"
         android:layout_width="83dp"
         android:layout_height="88dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/boxOne"
         app:layout_constraintEnd_toEndOf="@+id/boxOne"
+        app:layout_constraintHorizontal_bias="0.522"
         app:layout_constraintStart_toStartOf="@+id/boxOne"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.082"
+        app:layout_constraintTop_toTopOf="@+id/boxOne"
+        app:layout_constraintVertical_bias="0.234"
         app:srcCompat="@drawable/antenna" />
 
     <ImageView
@@ -69,20 +73,22 @@
         android:layout_height="81dp"
         android:layout_marginBottom="380dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView10"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageView10"
+        app:layout_constraintEnd_toEndOf="@+id/boxThree"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="@+id/boxThree"
+        app:layout_constraintTop_toTopOf="@+id/boxThree"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/latency" />
 
     <ImageView
         android:id="@+id/imageView12"
         android:layout_width="59dp"
         android:layout_height="68dp"
-        android:layout_marginBottom="164dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView11"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toStartOf="@+id/imageView11"
+        app:layout_constraintBottom_toBottomOf="@+id/boxTwo"
+        app:layout_constraintEnd_toEndOf="@+id/boxTwo"
+        app:layout_constraintStart_toStartOf="@+id/boxTwo"
+        app:layout_constraintTop_toTopOf="@+id/boxTwo"
+        app:layout_constraintVertical_bias="0.118"
         app:srcCompat="@drawable/wind" />
 
     <TextView
@@ -139,19 +145,17 @@
         android:id="@+id/ChannelMulti"
         android:layout_width="160dp"
         android:layout_height="57dp"
-        android:layout_marginBottom="92dp"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:maxLines="2"
         android:text="Du befinder dig på en okay Wi-Fi kanal"
         android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/boxTwo"
         app:layout_constraintEnd_toEndOf="@+id/boxTwo"
         app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="@+id/boxTwo"
-        app:layout_constraintTop_toBottomOf="@+id/imageView12"
-        app:layout_constraintVertical_bias="0.533" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView12" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
