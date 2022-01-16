@@ -8,7 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="TelenorBlue">#0091d2</color>
-    <color name="SucesGreen">#45F248</color>
+    <color name="SuccessGreen">#45F248</color>
     <color name="DecentYellow">#ffff00</color>
     <color name="FailureRed">#ff0000</color>
 

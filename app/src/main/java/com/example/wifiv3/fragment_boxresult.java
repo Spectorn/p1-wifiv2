@@ -3,7 +3,6 @@ package com.example.wifiv3;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 public class fragment_boxresult extends Fragment implements View.OnClickListener {
 
@@ -67,22 +65,23 @@ public class fragment_boxresult extends Fragment implements View.OnClickListener
 
     @SuppressLint("ResourceAsColor")
     public void SetScene(int Ranking) {
+        Fragment fragment = (Fragment) getFragmentManager().findFragmentByTag("RESULT");
         System.out.println("Sætter scene");
 
         switch (Ranking) {
             case 1:
                 System.out.println("boxresult case 1");
-                background.setColorFilter(getContext().getResources().getColor(R.color.SucesGreen));
+                background.setBackgroundColor(getResources().getColor(R.color.SuccessGreen));
                 Text.setText("Dit Wi-Fi virker godt i dette punkt");
                 break;
             case 2:
                 System.out.println("kører case 2");
-                background.setColorFilter(getContext().getResources().getColor(R.color.DecentYellow));
+                background.setBackgroundColor(getResources().getColor(R.color.DecentYellow));
                 Text.setText("Dit Wi-fi virker nogenlunde i dette punkt");
                 break;
             case 3:
                 System.out.println("kører case 3");
-                background.setColorFilter(getContext().getResources().getColor(R.color.FailureRed));
+                background.setBackgroundColor(getResources().getColor(R.color.FailureRed));
                 Text.setText("Dit Wi-Fi virker dårligt i dette punkt");
                 break;
 
