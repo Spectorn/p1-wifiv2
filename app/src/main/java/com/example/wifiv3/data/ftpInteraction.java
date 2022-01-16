@@ -128,12 +128,11 @@ public class ftpInteraction extends View {
     }
         // Callback function
         public long getDownload() {
-            Download = 3; return Download;
+             return Download;
         }
 
         // Callback function
         public long getUpload() {
-        Upload = 3;
             return Upload;
         }
     }
