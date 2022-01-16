@@ -3,6 +3,7 @@ package com.example.wifiv3;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ public class fragment_boxresult extends Fragment implements View.OnClickListener
 
     Button buttonOne;
     Button buttonTwo;
+    Button buttonThree;
     ImageView background;
     int Rank;
     TextView Text;
@@ -30,10 +32,12 @@ public class fragment_boxresult extends Fragment implements View.OnClickListener
         View view = lf.inflate(R.layout.fragment_boxresult, container, false);
         buttonOne = (Button) view.findViewById(R.id.button);
         buttonTwo = (Button) view.findViewById(R.id.button2);
+        buttonThree  = (Button) view.findViewById(R.id.button3);
         background = (ImageView) view.getRootView().findViewById(R.id.imageView5);
-        Text = (TextView) view.findViewById(R.id.textView3);
+        Text = (TextView) view.findViewById(R.id.WiFiStatus);
         buttonOne.setOnClickListener(this);
         buttonTwo.setOnClickListener(this);
+        buttonThree.setOnClickListener(this);
 
 
         return view;
@@ -45,15 +49,12 @@ public class fragment_boxresult extends Fragment implements View.OnClickListener
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         System.out.println("Fragment virker");
-
-
         Fragment fragment = (fragment_result) getFragmentManager().findFragmentByTag("RESULT");
         fragment_result FragRes = (fragment_result) fragment;
 
 
-        Rank = FragRes.getterRanking();
+        Rank = FragRes.GetRanking();
         System.out.println(Rank);
-        SetScene(Rank);
 
 
     }
@@ -71,18 +72,18 @@ public class fragment_boxresult extends Fragment implements View.OnClickListener
         switch (Ranking) {
             case 1:
                 System.out.println("boxresult case 1");
-                // giver Null object fejl
-                //background.setBackgroundColor(android.R.color.holo_green_light);
+                background.setColorFilter(getContext().getResources().getColor(R.color.SucesGreen));
+                Text.setText("Dit Wi-Fi virker godt i dette punkt");
                 break;
             case 2:
                 System.out.println("kører case 2");
-                //background.setBackgroundColor(android.R.color.holo_orange_light);
-                //Text.setText("Dit Wi-fi virker nogenlunde i dette punkt");
+                background.setColorFilter(getContext().getResources().getColor(R.color.DecentYellow));
+                Text.setText("Dit Wi-fi virker nogenlunde i dette punkt");
                 break;
             case 3:
                 System.out.println("kører case 3");
-                //background.setBackgroundColor(android.R.color.holo_red_dark);
-                //Text.setText("Dit Wi-Fi virker dårligt i dette punkt");
+                background.setColorFilter(getContext().getResources().getColor(R.color.FailureRed));
+                Text.setText("Dit Wi-Fi virker dårligt i dette punkt");
                 break;
 
 
@@ -104,6 +105,11 @@ public class fragment_boxresult extends Fragment implements View.OnClickListener
                 startActivity(intent2);
 
                 break;
+            case R.id.button3:
+                SetScene(Rank);
+                break;
+
+
         }
 
     }

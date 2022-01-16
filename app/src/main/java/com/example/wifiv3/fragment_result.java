@@ -58,16 +58,17 @@ public class fragment_result extends Fragment implements DataSender{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     public void BasisResult(){
         System.out.println("Basis værdier er sat");
         activity_wifitest activity = (activity_wifitest) getActivity();
-            activity.SetLayout();
+        activity.SetLayout();
 
     }
 
-    public void FirstTest(){
+    public int GetRanking(){
         int DownloadRank;
         int UploadRank;
         WifiInformation TestOne = new WifiInformation(R_Download, R_Upload, R_RSSI, BasisDownload, BasisUpload, BasisRSSI);
@@ -75,48 +76,19 @@ public class fragment_result extends Fragment implements DataSender{
         UploadRank = TestOne.CheckUpload();
         Ranking = TestOne.FinalRank(DownloadRank, UploadRank);
         System.out.println(Ranking);
-        switch(Ranking){
-            case 1:
-                GoodResult();
-                System.out.println("Kører GoodResult");
-                break;
-        }
         activity_wifitest activity = (activity_wifitest) getActivity();
         activity.SetLayout();
-
-
+        return Ranking;
 
     }
 
-    public void GoodResult(){
+    public void ResultDisplay(){
         FragmentTransaction ftThree = getFragmentManager().beginTransaction();
         ftThree.replace(R.id.FragmentContainer, new fragment_boxresult(), "BOX");
         ftThree.addToBackStack(null);
         ftThree.commit();
-
-        /*
-
-        Fragment fragment1 = (fragment_boxresult) getFragmentManager().findFragmentByTag("BOX");
-        fragment_boxresult FragBox = (fragment_boxresult) fragment1;
-        FragBox.SetScene(Ranking);
-
-         */
-
     }
 
-
-
-    public int getterRanking(){
-        Ranking = 1;
-        System.out.println(Ranking +"Det her er rank jeg sender");
-        return Ranking;
-
-    }
-    public void Destroy(){
-        System.out.println("Destroyer fragment");
-
-        getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-    }
 
     // Dette er funktionen hvori alt information bliver delt mellem activities og de 2 fragments
     @Override
@@ -129,7 +101,7 @@ public class fragment_result extends Fragment implements DataSender{
                 break;
             case 2:
                 TestTypeResult = TestType; R_Download = Download; R_Upload = Upload; R_BSSID = BSSID; R_RSSI = RSSI;
-                FirstTest();
+                ResultDisplay();
                 break;
         }
     }

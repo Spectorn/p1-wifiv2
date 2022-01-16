@@ -30,6 +30,7 @@ public class Activity_problems extends AppCompatActivity {
         ChannelMultiline = (EditText) findViewById(R.id.ChannelMulti);
         RssiMultiline = (EditText) findViewById(R.id.RssiMulti);
         LatencyMultiline = (EditText) findViewById(R.id.LatencyMulti);
+        InformationGather();
     }
 
 
