@@ -101,7 +101,7 @@ public class Activity_problems extends AppCompatActivity {
             ChannelMultiline.setText("Der er mange enheder på samme Wi-fi kanal. overvej at skifte kanal");
         }
         else{
-            ChannelMultiline.setText("Du befinder dig på¨en okay Wi-Fi kanal");
+            ChannelMultiline.setText("Du befinder dig på en okay Wi-Fi kanal");
         }
 
 

@@ -8,6 +8,27 @@
     <string name="PopUp2">Turn WiFi on</string>
     <string name="Popup3">Cancel</string>
     <string name="scanButton">Begin</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="success">Success</string>
+    <string name="details">See details</string>
+    <string name="problems">See problems</string>
+    <string name="suitable">Suitable</string>
+    <string name="notSuitable">Not suitable</string>
+    <string name="browsing">Internet browsing</string>
+    <string name="livestream">Livestreaming</string>
+    <string name="netflix">4K netflix streaming</string>
+    <string name="check">Check</string>
+    <string name="rssi">RSSI</string>
+    <string name="latency">Latency</string>
+    <string name="channels">Wi-Fi channels</string>
+    <string name="rssi1">The signal strength is good</string>
+    <string name="rssi2">The signal strength is decent, no changes required</string>
+    <string name="rssi3">The signal strength is acceptable, but could be improved</string>
+    <string name="rssi4">The signal strength is low. Outages can be expected</string>
+    <string name="rssi5">The signal strength is very low, which can lead to severe Wi-Fi issues</string>
+    <string name="latency1">The latency is low</string>
+    <string name="latency2">The latency is normal</string>
+    <string name="latency3">The latency is high and can cause problems</string>
+    <string name="latency4">The latency is very high. Issues can be expected</string>
+    <string name="channel1">A lot of networks are on the same channel, consider changing channels</string>
+    <string name="channel2">The current Wi-Fi channel is okay</string>
 </resources>

@@ -14,7 +14,7 @@
         android:layout_width="54dp"
         android:layout_height="15dp"
         android:layout_marginBottom="356dp"
-        android:text="Succes"
+        android:text="@string/success"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/Check"
         app:layout_constraintHorizontal_bias="0.49"

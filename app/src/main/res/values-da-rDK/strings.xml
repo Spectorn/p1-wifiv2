@@ -8,5 +8,28 @@
     <string name="PopUp2">Slå Wifi til</string>
     <string name="Popup3">Annuller</string>
     <string name="scanButton">Begynd</string>
+    <string name="success">Success</string>
+    <string name="details">Se detaljer</string>
+    <string name="problems">Se problemer</string>
+    <string name="suitable">Egnet</string>
+    <string name="notSuitable">Ikke egnet</string>
+    <string name="browsing">Internet surfing</string>
+    <string name="livestream">Livestreaming</string>
+    <string name="netflix">4K netflix streaming</string>
+    <string name="check">Tjek</string>
+    <string name="rssi">RSSI</string>
+    <string name="latency">Latens</string>
+    <string name="channels">Wi-Fi kanaler</string>
+    <string name="rssi1">Din signalstyrke er god</string>
+    <string name="rssi2">Din signal styrke er fin, ingen ændringer behøves</string>
+    <string name="rssi3">Din signalstyrke er acceptabel, men kan forbedres</string>
+    <string name="rssi4">Din signalstyrke er forholdsvis lav, og du kan opleve udfald</string>
+    <string name="rssi5">Din signalstyrke er rigtig dårlig og dette kan forudsage problemer for dit Wi-fi</string>
+    <string name="latency1">Der er meget lidt forsinkelse</string>
+    <string name="latency2">Du har en normal forsinkelse</string>
+    <string name="latency3">Du har en udsædvanlig høj ping og kan muligvis opleve problemer</string>
+    <string name="latency4">Der er en utrolig høj forsinkelse og dette skaber problemer</string>
+    <string name="channel1">Der er mange enheder på samme Wi-fi kanal. overvej at skifte kanal</string>
+    <string name="channel2">Du befinder dig på en okay Wi-Fi kanal</string>
 </resources>
 
