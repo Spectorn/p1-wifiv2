@@ -13,6 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.wifiv3.data.ftpInteraction;
+import com.example.wifiv3.data.langOptions;
+
+import java.io.IOException;
 
 public class Activity_visualresult extends AppCompatActivity {
     TextView DownloadText;
@@ -26,18 +29,13 @@ public class Activity_visualresult extends AppCompatActivity {
     ImageView boxTwo;
     long download;
     long upload;
-
-
-
-
-
+    langOptions lang;
 
     @Override
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visualresult);
-
+        lang = new langOptions(getApplicationContext());
 
         System.out.println("Fragment er i live");
 
@@ -50,6 +48,12 @@ public class Activity_visualresult extends AppCompatActivity {
         Overall = (TextView)  findViewById(R.id.Overall);
         boxOne = (ImageView) findViewById(R.id.boxOne);
         boxTwo = (ImageView) findViewById(R.id.boxTwo);
+
+        try {
+            lang.changeLanguage(findViewById(R.id.DownloadText), lang.getLang(), 3);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         ftpInteraction ftpCon = new ftpInteraction(getApplicationContext());
 

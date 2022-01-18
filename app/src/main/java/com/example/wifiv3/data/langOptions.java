@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -63,14 +64,40 @@ public class langOptions extends View{
         // Updates text depending on which activity is calling.
         // 1: MainActivity
         // 2: activity_wifitest
+        // 3: Activity_visualresult
+        // 4: Activity_problems
         if (activityNum == 1) {
             TextView welcomeText = view.getRootView().findViewById(R.id.textView2);
             welcomeText.setText(getResources().getString(R.string.greeting));
         } else if (activityNum == 2) {
             TextView scanText = view.getRootView().findViewById(R.id.textView);
             Button startScan = view.getRootView().findViewById(R.id.ScanButton);
+
             scanText.setText(getContext().getString(R.string.scanGreeting));
             startScan.setText(getResources().getString(R.string.scanButton));
+        } else if (activityNum == 3) {
+            TextView browsing1 = view.getRootView().findViewById(R.id.DownloadBrowsing);
+            TextView browsing2 = view.getRootView().findViewById(R.id.UploadBrowsing);
+            TextView netflix = view.getRootView().findViewById(R.id.NetflixText);
+            TextView streaming = view.getRootView().findViewById(R.id.StreamingText);
+            TextView suitable = view.getRootView().findViewById(R.id.textView4);
+            TextView notSuitable = view.getRootView().findViewById(R.id.textView5);
+            Button check = view.getRootView().findViewById(R.id.TjekStats);
+
+            browsing1.setText(getResources().getText(R.string.browsing));
+            browsing2.setText(getResources().getText(R.string.browsing));
+            netflix.setText(getResources().getText(R.string.netflix));
+            streaming.setText(getResources().getText(R.string.livestream));
+            suitable.setText(getResources().getText(R.string.suitable));
+            notSuitable.setText(getResources().getText(R.string.notSuitable));
+            check.setText(getResources().getText(R.string.check));
+        } else if (activityNum == 4) { // Activity 4
+            System.out.println("ok");
+        } else if (activityNum == 5) {
+            Button details = view.findViewById(R.id.button);
+            Button problem = view.findViewById(R.id.button2); // Wrong view...
+            details.setText(getResources().getString(R.string.details));
+            //problem.setText(getResources().getString(R.string.problems));
         }
 
         setLang(lang);

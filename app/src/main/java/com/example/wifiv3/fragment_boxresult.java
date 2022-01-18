@@ -12,9 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import com.example.wifiv3.data.langOptions;
+
+import java.io.IOException;
 
 public class fragment_boxresult extends Fragment implements View.OnClickListener {
-
     Button buttonOne;
     Button buttonTwo;
     Button buttonThree;
@@ -22,6 +24,7 @@ public class fragment_boxresult extends Fragment implements View.OnClickListener
     int Rank;
     TextView Text;
     int TestNumber;
+    langOptions lang;
 
 
     @Override
@@ -53,8 +56,7 @@ public class fragment_boxresult extends Fragment implements View.OnClickListener
 
         Rank = FragRes.GetRanking();
         System.out.println(Rank);
-
-
+        lang = new langOptions(getContext());
     }
 
     public void Initiator() {
@@ -84,8 +86,6 @@ public class fragment_boxresult extends Fragment implements View.OnClickListener
                 background.setBackgroundColor(getResources().getColor(R.color.FailureRed));
                 Text.setText("Dit Wi-Fi virker dårligt i dette punkt");
                 break;
-
-
         }
     }
 
@@ -106,11 +106,12 @@ public class fragment_boxresult extends Fragment implements View.OnClickListener
                 break;
             case R.id.button3:
                 SetScene(Rank);
+                try {
+                    lang.changeLanguage(view.getRootView().findViewById(R.id.button), lang.getLang(), 5);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
-
-
         }
-
     }
-
 }
